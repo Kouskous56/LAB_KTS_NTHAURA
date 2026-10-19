@@ -1,10 +1,21 @@
-# ===== .gitignore (v2) =====
-# Policy: accept EVERYTHING except bitforge build outputs and OS junk.
-# Vivado project_1, .runs, .sim, .Xil, .dcp, .bit, .rpt, iverilog .vvp/.vcd are all tracked.
+# ===== .gitignore (v3) =====
+# Policy: track everything EXCEPT derived (non-Vivado) files.
+# Vivado project files (.xpr, .runs, .sim, .hw, .bit, .dcp, .rpt, .jou, .log) are kept.
 
-# --- bitforge artifacts (do not track) ---
+# --- bitforge artifacts (never track) ---
 **/*bitforge*/
-**/*bitforge*
+*bitforge*
+
+# --- derived files from manual iverilog runs (not Vivado) ---
+tb.vvp
+wave.vcd
+sim.log
+sim_ascii.txt
+compile.log
+
+# keep Vivado-generated waveforms inside project runs
+!**/project_*/**/wave.vcd
+
 # --- OS junk ---
 Thumbs.db
 desktop.ini

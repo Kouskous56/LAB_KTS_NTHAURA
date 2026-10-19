@@ -1,5 +1,0 @@
-VCD info: dumpfile wave.vcd opened for output.
-start test
-ALL 100 TESTS PASS
-done
-tb.sv:27: $finish called at 100000 (1ps)
