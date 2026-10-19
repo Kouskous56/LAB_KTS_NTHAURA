@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
-// EXP_1: f = x'yz + (xy)'z + xy  (expression as given in the problem)
-module f_original (
+// EXP_2_1: f = x'yz + (xy)'z + xy  (as given, NOT simplified)
+module f_exp2_1 (
     input  logic x, y, z,
     output logic f
 );
