@@ -4,3 +4,10 @@
 !*.xdc
 !.gitignore
 !README.md
+# re-hide Vivado build outputs even if they are .sv/.xdc
+**/build_bitforge/
+**/*.runs/
+**/*.sim/
+**/*.hw/
+**/*.cache/
+**/.Xil/
