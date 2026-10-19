@@ -13,7 +13,7 @@ module tb;
         $dumpvars(0, tb);
         $display("start test");
         for (int v = 0; v < 8; v++) begin
-            {z, y, x} = v[2:0];
+            {x, y, z} = v[2:0];
             #1;
             exp = x & ~y;
             if (F !== exp || Fs !== exp || F !== Fs) bad++;

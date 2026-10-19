@@ -27,7 +27,7 @@ module tb;
         $dumpvars(0, tb);
         $display("start test");
         for (int v = 0; v < 8; v++) begin
-            {Z, Y, X} = v[2:0];
+            {X, Y, Z} = v[2:0];
             #1;
             exp = expected(X, Y, Z);
             if (F !== exp || Fpos !== exp || F !== Fpos) bad++;

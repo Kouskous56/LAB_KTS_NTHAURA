@@ -1,0 +1,13 @@
+Time resolution is 1 ps
+start test
+xyz=000 f=0 exp=0   OK
+xyz=100 f=1 exp=1   OK
+xyz=010 f=1 exp=1   OK
+xyz=110 f=0 exp=0   OK
+xyz=001 f=1 exp=1   OK
+xyz=101 f=0 exp=0   OK
+xyz=011 f=0 exp=0   OK
+xyz=111 f=1 exp=1   OK
+ALL 8 TESTS PASS
+done
+$finish called at time : 8 ns : File "D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_4/tb.sv" Line 39

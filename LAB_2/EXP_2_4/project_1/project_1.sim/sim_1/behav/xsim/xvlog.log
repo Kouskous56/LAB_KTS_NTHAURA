@@ -1,0 +1,8 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_4/f_mux74ls151.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module f_mux74ls151
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_4/mux74ls151.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mux74ls151
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_4/tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_4/project_1/project_1.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
