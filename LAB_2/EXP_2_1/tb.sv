@@ -6,7 +6,7 @@ module tb;
     f_exp2_1 u (.x(x), .y(y), .z(z), .f(f));
 
     int bad = 0;
-    logic exp;
+    logic exp = 1'b0;
 
     // truth table of f = x'yz + (xy)'z + xy  (== xy + z): 0,1,0,1,0,1,1,1 for xyz 000..111
     function automatic logic expected(input logic x, y, z);
@@ -29,8 +29,8 @@ module tb;
         // expected truth table of f = x'yz + (xy)'z + xy
         for (int v = 0; v < 8; v++) begin
             {x, y, z} = v[2:0];
-            #1;
             exp = expected(x, y, z);
+            #1;
             if (f !== exp) bad++;
             $display("xyz=%b%b%b f=%b exp=%b %s", x, y, z, f, exp,
                      (f === exp) ? "OK" : "FAIL");

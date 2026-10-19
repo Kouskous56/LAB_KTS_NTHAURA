@@ -28,8 +28,8 @@ module tb;
         $display("start test");
         for (int v = 0; v < 8; v++) begin
             {X, Y, Z} = v[2:0];
-            #1;
             exp = expected(X, Y, Z);
+            #1;
             if (F !== exp || Fpos !== exp || F !== Fpos) bad++;
             $display("XYZ=%b%b%b F=%b Fpos=%b exp=%b %s", X, Y, Z, F, Fpos, exp,
                      (F === exp && Fpos === exp) ? "OK" : "FAIL");

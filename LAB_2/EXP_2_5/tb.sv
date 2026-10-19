@@ -27,8 +27,8 @@ module tb;
         $display("start test");
         for (int v = 0; v < 8; v++) begin
             {x, y, z} = v[2:0];
-            #1;
             exp = expected(x, y, z);
+            #1;
             if (f !== exp) bad++;
             $display("xyz=%b%b%b f=%b exp=%b %s", x, y, z, f, exp,
                      (f === exp) ? "OK" : "FAIL");
