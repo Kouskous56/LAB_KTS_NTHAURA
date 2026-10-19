@@ -19,7 +19,7 @@ module tb;
             // expected: f = xy + z
             exp = (x & y) | z;
             if (f !== exp) bad++;
-            $display("zyx=%b%b%b f=%b exp=%b %s", x, y, z, f, exp,
+            $display("xyz=%b%b%b f=%b exp=%b %s", x, y, z, f, exp,
                      (f === exp) ? "OK" : "FAIL");
         end
         if (bad == 0) $display("ALL 8 TESTS PASS");
