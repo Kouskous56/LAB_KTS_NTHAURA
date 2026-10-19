@@ -1,0 +1,12 @@
+Time resolution is 1 ps
+start test
+ABC=000 F=0 (exp 0)
+ABC=001 F=0 (exp 0)
+ABC=010 F=0 (exp 0)
+ABC=011 F=0 (exp 0)
+ABC=100 F=1 (exp 1)
+ABC=101 F=0 (exp 0)
+ABC=110 F=1 (exp 1)
+ABC=111 F=0 (exp 0)
+done
+$finish called at time : 8 ns : File "D:/LAB_KTS_NTHAURA/decoder_3_1/tb.sv" Line 14

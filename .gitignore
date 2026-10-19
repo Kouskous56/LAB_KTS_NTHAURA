@@ -1,13 +1,10 @@
-*
-!*/
-!*.sv
-!*.xdc
-!.gitignore
-!README.md
-# re-hide Vivado build outputs even if they are .sv/.xdc
-**/build_bitforge/
-**/*.runs/
-**/*.sim/
-**/*.hw/
-**/*.cache/
-**/.Xil/
+# ===== .gitignore (v2) =====
+# Policy: accept EVERYTHING except bitforge build outputs and OS junk.
+# Vivado project_1, .runs, .sim, .Xil, .dcp, .bit, .rpt, iverilog .vvp/.vcd are all tracked.
+
+# --- bitforge artifacts (do not track) ---
+**/*bitforge*/
+**/*bitforge*
+# --- OS junk ---
+Thumbs.db
+desktop.ini
