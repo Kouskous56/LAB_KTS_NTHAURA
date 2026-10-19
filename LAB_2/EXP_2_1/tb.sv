@@ -6,7 +6,21 @@ module tb;
     f_exp2_1 u (.x(x), .y(y), .z(z), .f(f));
 
     int bad = 0;
-    logic exp = 1'b0;
+    logic exp;
+
+    // truth table of f = x'yz + (xy)'z + xy  (== xy + z): 0,1,0,1,0,1,1,1 for xyz 000..111
+    function automatic logic expected(input logic x, y, z);
+        case ({x,y,z})
+            3'b000: return 1'b0;
+            3'b001: return 1'b1;
+            3'b010: return 1'b0;
+            3'b011: return 1'b1;
+            3'b100: return 1'b0;
+            3'b101: return 1'b1;
+            3'b110: return 1'b1;
+            3'b111: return 1'b1;
+        endcase
+    endfunction
 
     initial begin
         $dumpfile("wave.vcd");
@@ -16,8 +30,7 @@ module tb;
         for (int v = 0; v < 8; v++) begin
             {x, y, z} = v[2:0];
             #1;
-            // expected: f = xy + z
-            exp = (x & y) | z;
+            exp = expected(x, y, z);
             if (f !== exp) bad++;
             $display("xyz=%b%b%b f=%b exp=%b %s", x, y, z, f, exp,
                      (f === exp) ? "OK" : "FAIL");

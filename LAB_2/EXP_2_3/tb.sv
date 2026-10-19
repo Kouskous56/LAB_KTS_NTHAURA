@@ -8,6 +8,20 @@ module tb;
     int bad = 0;
     logic exp;
 
+    // truth table of f = x & ~y : 0,0,0,0,1,1,0,0 for xyz 000..111
+    function automatic logic expected(input logic x, y, z);
+        case ({x,y,z})
+            3'b000: return 1'b0;
+            3'b001: return 1'b0;
+            3'b010: return 1'b0;
+            3'b011: return 1'b0;
+            3'b100: return 1'b1;
+            3'b101: return 1'b1;
+            3'b110: return 1'b0;
+            3'b111: return 1'b0;
+        endcase
+    endfunction
+
     initial begin
         $dumpfile("wave.vcd");
         $dumpvars(0, tb);
@@ -15,7 +29,7 @@ module tb;
         for (int v = 0; v < 8; v++) begin
             {x, y, z} = v[2:0];
             #1;
-            exp = x & ~y;
+            exp = expected(x, y, z);
             if (F !== exp || Fs !== exp || F !== Fs) bad++;
             $display("xyz=%b%b%b F=%b Fs=%b exp=%b %s", x, y, z, F, Fs, exp,
                      (F === exp && Fs === exp) ? "OK" : "FAIL");
