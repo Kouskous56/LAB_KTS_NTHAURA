@@ -6,6 +6,5 @@ module xs3_to_bin (
     input  logic [3:0] xs3,
     output logic [3:0] bin
 );
-    logic cout;
-    adder7483 u (.A(xs3), .B(4'b1101), .Cin(1'b0), .S(bin), .Cout(cout));
+    adder7483 u (.A(xs3), .B(4'b1101), .Cin(1'b0), .S(bin), .Cout());
 endmodule

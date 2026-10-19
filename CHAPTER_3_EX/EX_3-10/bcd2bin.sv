@@ -27,9 +27,8 @@ module bcd2bin (
 
     // high nibble bits 6..3 (bit3 is carry from low nibble)
     logic [3:0] shi;
-    logic       c3;
     adder7483 a3 (.A({1'b0,1'b0,1'b0,p[4]}), .B({1'b0,t[3],t[2],t[1]}), .Cin(c2),
-                  .S(shi), .Cout(c3));
+                  .S(shi), .Cout());
 
     assign bin = {shi[2:0], slo};   // bits 6..4 = shi[2..0], bits 3..0 = slo
 endmodule
