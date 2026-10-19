@@ -1,0 +1,13 @@
+VCD info: dumpfile wave.vcd opened for output.
+start test
+XYZ=000 F=1 Fpos=1 exp=1   OK
+XYZ=100 F=1 Fpos=1 exp=1   OK
+XYZ=010 F=0 Fpos=0 exp=0   OK
+XYZ=110 F=0 Fpos=0 exp=0   OK
+XYZ=001 F=1 Fpos=1 exp=1   OK
+XYZ=101 F=0 Fpos=0 exp=0   OK
+XYZ=011 F=1 Fpos=1 exp=1   OK
+XYZ=111 F=1 Fpos=1 exp=1   OK
+ALL 8 TESTS PASS
+done
+tb.sv:40: $finish called at 8000 (1ps)
