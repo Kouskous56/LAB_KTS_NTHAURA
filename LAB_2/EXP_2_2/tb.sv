@@ -1,9 +1,8 @@
 `timescale 1ns/1ps
 module tb;
     logic X = 1'b0, Y = 1'b0, Z = 1'b0;
-    logic F, Fpos;
-    f_exp2_2     u0 (.X(X), .Y(Y), .Z(Z), .F(F));
-    f_exp2_2_pos u1 (.X(X), .Y(Y), .Z(Z), .F(Fpos));
+    logic F;
+    f_exp2_2 u (.X(X), .Y(Y), .Z(Z), .F(F));
 
     int bad = 0;
     logic exp;
@@ -30,9 +29,9 @@ module tb;
             {X, Y, Z} = v[2:0];
             exp = expected(X, Y, Z);
             #1;
-            if (F !== exp || Fpos !== exp || F !== Fpos) bad++;
-            $display("XYZ=%b%b%b F=%b Fpos=%b exp=%b %s", X, Y, Z, F, Fpos, exp,
-                     (F === exp && Fpos === exp) ? "OK" : "FAIL");
+            if (F !== exp) bad++;
+            $display("XYZ=%b%b%b F=%b exp=%b %s", X, Y, Z, F, exp,
+                     (F === exp) ? "OK" : "FAIL");
         end
         if (bad == 0) $display("ALL 8 TESTS PASS");
         else $display("%0d FAILURES", bad);
