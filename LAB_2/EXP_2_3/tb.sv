@@ -1,0 +1,28 @@
+`timescale 1ns/1ps
+module tb;
+    logic x = 1'b0, y = 1'b0, z = 1'b0;
+    logic F, Fs;
+    f_exp2_3      u0 (.x(x), .y(y), .z(z), .F(F));
+    f_exp2_3_simp u1 (.x(x), .y(y), .z(z), .F(Fs));
+
+    int bad = 0;
+    logic exp;
+
+    initial begin
+        $dumpfile("wave.vcd");
+        $dumpvars(0, tb);
+        $display("start test");
+        for (int v = 0; v < 8; v++) begin
+            {z, y, x} = v[2:0];
+            #1;
+            exp = x & ~y;
+            if (F !== exp || Fs !== exp || F !== Fs) bad++;
+            $display("xyz=%b%b%b F=%b Fs=%b exp=%b %s", x, y, z, F, Fs, exp,
+                     (F === exp && Fs === exp) ? "OK" : "FAIL");
+        end
+        if (bad == 0) $display("ALL 8 TESTS PASS");
+        else $display("%0d FAILURES", bad);
+        $display("done");
+        $finish;
+    end
+endmodule
