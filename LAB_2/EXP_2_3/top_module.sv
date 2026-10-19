@@ -4,8 +4,7 @@ module top_module (
     output logic [15:0] LED
 );
     logic f;
-    f_exp2_3 u (.x(SW[0]), .y(SW[1]), .z(SW[2]), .F(f));
-    assign LED[0]    = f;
+    f_exp2_3 u (.x(SW[2]), .y(SW[1]), .z(SW[0]), .F(f));
     assign LED[15]   = f;
-    assign LED[14:1] = 14'b0;
+    assign LED[14:0] = 15'b0;
 endmodule
