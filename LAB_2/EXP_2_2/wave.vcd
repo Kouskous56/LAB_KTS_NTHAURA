@@ -1,0 +1,90 @@
+$date
+	Mon Oct 19 12:50:52 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module tb $end
+$var wire 1 ! Fpos $end
+$var wire 1 " F $end
+$var reg 1 # X $end
+$var reg 1 $ Y $end
+$var reg 1 % Z $end
+$var reg 1 & exp $end
+$var integer 32 ' bad [31:0] $end
+$scope function expected $end
+$upscope $end
+$scope module u0 $end
+$var wire 1 " F $end
+$var wire 1 # X $end
+$var wire 1 $ Y $end
+$var wire 1 % Z $end
+$upscope $end
+$scope module u1 $end
+$var wire 1 ! F $end
+$var wire 1 # X $end
+$var wire 1 $ Y $end
+$var wire 1 % Z $end
+$upscope $end
+$scope begin $ivl_for_loop0 $end
+$var integer 32 ( v [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 (
+b0 '
+x&
+0%
+0$
+0#
+1"
+1!
+$end
+#1000
+1#
+b1 (
+1&
+#2000
+0"
+0!
+1$
+0#
+b10 (
+#3000
+1#
+b11 (
+0&
+#4000
+1"
+1!
+1%
+0$
+0#
+b100 (
+#5000
+0"
+0!
+1#
+b101 (
+1&
+#6000
+1"
+1!
+1$
+0#
+b110 (
+0&
+#7000
+1#
+b111 (
+1&
+#8000
+b1000 (
