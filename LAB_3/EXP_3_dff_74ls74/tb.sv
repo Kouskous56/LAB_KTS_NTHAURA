@@ -22,8 +22,9 @@ module tb;
         $display("start test");
 
         // ---- asynchronous rows (Table 3.5, top) ----
-        PRE = 1'b0; CLR = 1'b0; #1;                       // PRE and CLR both asserted
-        check(1'b1, 1'b0, "PRE=0 CLR=0");
+        // PRE=0 CLR=0 -> nonstable (Q=1, Q'=1) per datasheet Note 1
+        PRE = 1'b0; CLR = 1'b0; #1;
+        check(1'b1, 1'b1, "PRE=0 CLR=0 (nonstable)");
 
         PRE = 1'b1; CLR = 1'b0; #1;                       // CLR asserted (negedge)
         check(1'b0, 1'b1, "PRE=1 CLR=0");

@@ -1,9 +1,12 @@
 `timescale 1ns/1ps
 // 74LS74 model: D flip-flop, rising-edge triggered, asynchronous PRE/CLR (active low)
-//   PRE=0 -> Q=1 (preset dominates), CLR=0 -> Q=0
-//   otherwise Q <= D on the rising edge of CLK
-// The async inputs are modelled as level-sensitive overrides on the outputs
-// (matches the 74LS74 function table used in Table 3.5 of the lab manual).
+// Datasheet (TI SN74LS74A) + Figure 3.5 of the lab manual:
+//   PRE=0, CLR=1 -> Q=1, Q'=0   (preset, level-sensitive)
+//   PRE=1, CLR=0 -> Q=0, Q'=1   (clear, level-sensitive)
+//   PRE=0, CLR=0 -> Q=1, Q'=1   (NONSTABLE - undefined, see Note 1)
+//   PRE=1, CLR=1 -> Q<=D on the rising edge of CLK, otherwise hold
+// The async inputs act on the level (not only on the edge), so they are
+// modelled as an override on the outputs.
 module dff74ls74 (
     input  logic D, CLK, PRE, CLR,
     output logic Q, QN
@@ -14,6 +17,7 @@ module dff74ls74 (
         else if (!CLR) q <= 1'b0;
         else           q <= D;
     end
-    assign Q  = (!PRE) ? 1'b1 : (!CLR) ? 1'b0 : q;
-    assign QN = ~Q;
+    // both PRE and CLR asserted -> nonstable (Q=1, Q'=1) per Note 1
+    assign Q  = (!PRE && !CLR) ? 1'b1 : (!PRE) ? 1'b1 : (!CLR) ? 1'b0 : q;
+    assign QN = (!PRE && !CLR) ? 1'b1 : (!PRE) ? 1'b0 : (!CLR) ? 1'b1 : ~q;
 endmodule
