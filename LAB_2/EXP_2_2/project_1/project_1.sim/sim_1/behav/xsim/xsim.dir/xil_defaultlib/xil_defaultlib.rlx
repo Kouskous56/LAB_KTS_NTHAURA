@@ -2,7 +2,7 @@
 2020.2
 Jun 16 2026
 11:10:11
-D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_2/f_exp2_2.sv,1792389040,systemVerilog,,D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_2/f_exp2_2_pos.sv,,f_exp2_2,,uvm,C:/Xilinx/2026.1/Vivado/data/rsb/busdef,,,,,
+D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_2/f_exp2_2.sv,1792389040,systemVerilog,,D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_2/tb.sv,,f_exp2_2,,uvm,C:/Xilinx/2026.1/Vivado/data/rsb/busdef,,,,,
 D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_2/f_exp2_2_pos.sv,1792389043,systemVerilog,,D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_2/tb.sv,,f_exp2_2_pos,,uvm,C:/Xilinx/2026.1/Vivado/data/rsb/busdef,,,,,
 D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_2/project_1/project_1.sim/sim_1/behav/xsim/glbl.v,1773749341,verilog,,,,glbl,,uvm,,,,,,
-D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_2/tb.sv,1792389048,systemVerilog,,,,tb,,uvm,C:/Xilinx/2026.1/Vivado/data/rsb/busdef,,,,,
+D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_2/tb.sv,1792400030,systemVerilog,,,,tb,,uvm,C:/Xilinx/2026.1/Vivado/data/rsb/busdef,,,,,

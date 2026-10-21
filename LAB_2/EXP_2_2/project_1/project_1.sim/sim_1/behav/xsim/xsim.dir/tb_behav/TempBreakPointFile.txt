@@ -1,3 +1,1 @@
 Breakpoint File Version 1.0
-26,true,"D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_2/tb.sv"
-27,true,"D:/LAB_KTS_NTHAURA/LAB_2/EXP_2_2/tb.sv"
