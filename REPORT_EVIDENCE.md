@@ -27,17 +27,17 @@ python tools\verify_all.py -o REPORT_EVIDENCE.md
 | EXP_2_5 - 74LS138, f = sum m(0,2,5,7) | PASS | PASS | PASS/PASS | có | 3 |
 | LAB_3 EXP_1 - Full Adder (Table 3.3) | PASS | PASS | PASS/PASS | - | 4 |
 | LAB_3 EXP_2 - 4-bit Adder/Subtractor | PASS | PASS | PASS/PASS | - | 4 |
-| LAB_3 EXP_3 - D flip-flop 74LS74 (Table 3.5) | PASS | - | - | - | 2 |
-| LAB_3 EXP_4 - Bộ đếm 0 đến 7 | PASS | - | - | - | 3 |
-| LAB_3 EXP_5 - Máy trạng thái (Figure 3.6) | PASS | - | - | - | 3 |
+| LAB_3 EXP_3 - D flip-flop 74LS74 (Table 3.5) | PASS | PASS (vector) | PASS/PASS | - | 3 |
+| LAB_3 EXP_4 - Bộ đếm 0 đến 7 | PASS | PASS (vector) | PASS/PASS | - | 4 |
+| LAB_3 EXP_5 - Máy trạng thái (Figure 3.6) | PASS | PASS (vector) | PASS/PASS | - | 4 |
 | PRELAB_3 - Full Adder (Table 3.1) | PASS | PASS | PASS/PASS | - | 4 |
 | PRELAB_3 - 4-bit Adder/Subtractor (Table 3.4) | PASS | PASS | PASS/PASS | - | 4 |
-| PRELAB_3 - Bộ đếm 0 đến 7 | PASS | - | - | - | 3 |
-| PRELAB_3 - Máy trạng thái (Figure 3.4) | PASS | - | - | - | 3 |
+| PRELAB_3 - Bộ đếm 0 đến 7 | PASS | PASS (vector) | PASS/PASS | - | 4 |
+| PRELAB_3 - Máy trạng thái (Figure 3.4) | PASS | PASS (vector) | PASS/PASS | - | 4 |
 
 - iverilog: **14/14** project PASS
-- Logisim: **9/14** project có bảng chân lý đúng
-- SPICE: **9/14** project PASS ở cả LTspice và ngspice
+- Logisim: **14/14** project có bảng chân lý đúng
+- SPICE: **14/14** project PASS ở cả LTspice và ngspice
 - Bitstream: **5/14** project có file `.bit` (chỉ LAB_2, chương 3 không build .bit)
 
 ## File minh chứng từng bài
@@ -51,19 +51,20 @@ python tools\verify_all.py -o REPORT_EVIDENCE.md
 | EXP_2_5 - 74LS138, f = sum m(0,2,5,7) | Logisim: `dec_74ls138.circ`<br>`logisim_table.txt`<br>SPICE: `dec_74ls138.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `wave.png`, `spice_wave.png` |
 | LAB_3 EXP_1 - Full Adder (Table 3.3) | Logisim: `full_adder.circ`<br>`logisim_table.txt`<br>SPICE: `full_adder.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `application_circuit.png`, `wave.png`, `spice_wave.png` |
 | LAB_3 EXP_2 - 4-bit Adder/Subtractor | Logisim: `adder4.circ`<br>`logisim_table.txt`<br>SPICE: `adder4.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `application_circuit.png`, `wave.png`, `spice_wave.png` |
-| LAB_3 EXP_3 - D flip-flop 74LS74 (Table 3.5) | ảnh: `logic_diagram.png`, `wave.png` |
-| LAB_3 EXP_4 - Bộ đếm 0 đến 7 | ảnh: `logic_diagram.png`, `application_circuit.png`, `wave.png` |
-| LAB_3 EXP_5 - Máy trạng thái (Figure 3.6) | ảnh: `logic_diagram.png`, `state_diagram.png`, `wave.png` |
+| LAB_3 EXP_3 - D flip-flop 74LS74 (Table 3.5) | Logisim: `dff74ls74.circ`<br>`logisim_table.txt`<br>SPICE: `dff74ls74.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `wave.png`, `spice_wave.png` |
+| LAB_3 EXP_4 - Bộ đếm 0 đến 7 | Logisim: `counter_0_7.circ`<br>`logisim_table.txt`<br>SPICE: `counter_0_7.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `application_circuit.png`, `wave.png`, `spice_wave.png` |
+| LAB_3 EXP_5 - Máy trạng thái (Figure 3.6) | Logisim: `fsm_fig34.circ`<br>`logisim_table.txt`<br>SPICE: `fsm_fig34.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `state_diagram.png`, `wave.png`, `spice_wave.png` |
 | PRELAB_3 - Full Adder (Table 3.1) | Logisim: `full_adder.circ`<br>`logisim_table.txt`<br>SPICE: `full_adder.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `application_circuit.png`, `wave.png`, `spice_wave.png` |
 | PRELAB_3 - 4-bit Adder/Subtractor (Table 3.4) | Logisim: `adder4.circ`<br>`logisim_table.txt`<br>SPICE: `adder4.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `application_circuit.png`, `wave.png`, `spice_wave.png` |
-| PRELAB_3 - Bộ đếm 0 đến 7 | ảnh: `logic_diagram.png`, `application_circuit.png`, `wave.png` |
-| PRELAB_3 - Máy trạng thái (Figure 3.4) | ảnh: `logic_diagram.png`, `state_diagram.png`, `wave.png` |
+| PRELAB_3 - Bộ đếm 0 đến 7 | Logisim: `counter_0_7.circ`<br>`logisim_table.txt`<br>SPICE: `counter_0_7.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `application_circuit.png`, `wave.png`, `spice_wave.png` |
+| PRELAB_3 - Máy trạng thái (Figure 3.4) | Logisim: `fsm_fig34.circ`<br>`logisim_table.txt`<br>SPICE: `fsm_fig34.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `state_diagram.png`, `wave.png`, `spice_wave.png` |
 
 ## Ghi chú
 
 - Chương 3 (`LAB_3`, `PRELAB_3`) **không build `.bit`** theo yêu cầu, chỉ kiểm tra bằng `iverilog`.
   Riêng `LAB_2` có đủ 5 file `.bit` (đã nạp lên Nexys A7).
-- Ba mạch tuần tự (D flip-flop, bộ đếm, máy trạng thái) **không kiểm được bằng Logisim headless** vì
-  chế độ bảng chân lý của Logisim chỉ phân tích mạch tổ hợp. Chúng được kiểm bằng testbench `iverilog`
-  và dạng sóng `wave.png`.
+- Chế độ bảng chân lý của Logisim (`-tty table`) chỉ phân tích được **mạch tổ hợp**.
+  Ba mạch tuần tự (D flip-flop, bộ đếm, máy trạng thái) được dựng bằng **IC thật**
+  (74LS74, 74LS08, 74LS32) và kiểm bằng **chế độ test vector** (`logisim_vectors.txt`);
+  hành vi đầy đủ được kiểm bằng mô phỏng SPICE và testbench `iverilog`.
 - Chi tiết về cách dùng Logisim / LTspice / ngspice: `tools/README.md`.

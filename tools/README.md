@@ -10,6 +10,9 @@ Mọi script trong thư mục này chạy **hoàn toàn bằng terminal**, khôn
 | `spice.py` | Chạy LTspice / ngspice batch, đọc file `.raw` | dữ liệu mô phỏng |
 | `spice_lab2.py` | Mô phỏng SPICE cho 5 bài Lab 2 | `*.cir`, `spice_table_*.txt`, `spice_wave.png` |
 | `spice_lab3.py` | Mô phỏng SPICE cho Full Adder và bộ cộng 4 bit | `*.cir`, `spice_table_*.txt`, `spice_wave.png` |
+| `logisim_lab2.py` | Dựng 5 mạch Lab 2 (EXP_2_4/2_5 dùng **IC thật 74LS151, 74LS138**) | `*.circ`, `logisim_table.txt` |
+| `logisim_lab3_seq.py` | Dựng DFF / bộ đếm / máy trạng thái bằng **IC thật 74LS74, 74LS08, 74LS32**, kiểm bằng test vector | `*.circ`, `logisim_table.txt`, `logisim_vectors.txt` |
+| `spice_lab3_seq.py` | Mô hình SPICE của 74LS74 + bộ đếm + máy trạng thái (LTspice và ngspice) | `*.cir`, `spice_table_*.txt`, `spice_wave.png` |
 | `verify_all.py` | Kiểm tra 14 project (iverilog + Logisim + SPICE + `.bit` + ảnh) | bảng tổng hợp, `REPORT_EVIDENCE.md` |
 | `vcd2png.py` | Vẽ waveform VCD theo style GTKWave | `wave.png`, `spice_wave.png` |
 | `schematic.py`, `draw_lab3.py` | Vẽ logic diagram / application circuit / state diagram | `logic_diagram.png`, ... |
@@ -104,3 +107,30 @@ python tools\verify_all.py -o REPORT_EVIDENCE.md   # kiểm tra toàn bộ
 
 Kết quả SPICE được tự đối chiếu với bảng chân lý chuẩn và ghi `RESULT: PASS/FAIL`
 vào cuối `spice_table_*.txt`.
+
+## Bài học thêm (Logisim TTL library và mô hình FF trong SPICE)
+
+### Dùng IC thật trong Logisim
+
+- Thư viện TTL nằm ở lib `A` (`<lib desc="#TTL" name="A"/>`), các IC được gọi bằng
+  `_ID` của lớp Java: `7474`, `7408`, `7432`, `7400`, `74138`, `74151`…
+- **Bắt buộc bật chân nguồn**: `<a name="VccGndPorts" val="true"/>`, nếu không ngõ ra
+  của IC luôn bằng `U` (điều kiện trong `AbstractTtlGate.propagate`).
+- Vị trí chân theo bố cục DIP chuẩn (đọc từ `AbstractTtlGate.updatePorts`):
+  pin `1..N/2` nằm ở cạnh dưới (`dy = +30`, `dx = 20·i + 10`), pin `N/2+1..N` ở cạnh
+  trên (`dy = −30`, `dx = width − 20·(i − N/2) − 10`), `width = 10·N`, `height = 60`.
+- Chân GND/VCC của 74LS74 ở pin 7/14, của 74LS138 và 74LS151 ở pin 8/16.
+- Chế độ **test vector** (`-w <circuit> <vector> <circ>`) kiểm được mạch tuần tự, nhưng
+  **khởi tạo lại trạng thái mạch ở mỗi dòng vector** → chỉ kiểm được dòng có cạnh clock
+  hoặc có preset/clear; phần "giữ trạng thái" phải kiểm bằng SPICE hoặc testbench.
+
+### Mô hình flip-flop trong SPICE
+
+- Dùng **cổng tắc + tụ giữ**: mở cổng tắc trong xung hẹp ở cạnh dây dương của clock để
+  lấy mẫu D, tụ giữ trạng thái, điện trở rất lớn chống rò.
+- ngspice **không có** hàm `if()` và `delay()` trong nguồn hành vi → dùng toán tử ba ngôi
+  `? :` và tạo độ trễ bằng mạch RC thật.
+- Vòng phản hồi `D = ~Q` tạo vòng hàm phi tuyến không có lời giải ổn định → phải
+  dùng **bản sao trì hoãn bằng RC** (5 ns) cho logic trạng thái.
+- Mức logic trong netlist phải là **0 V và 5 V**; dùng nhầm mức 1 V làm công tắc clear
+  không bao giờ tắt và flip-flop không lấy mẫu được.

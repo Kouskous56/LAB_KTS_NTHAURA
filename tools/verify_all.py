@@ -188,9 +188,10 @@ FOOTER = """
 
 - Chương 3 (`LAB_3`, `PRELAB_3`) **không build `.bit`** theo yêu cầu, chỉ kiểm tra bằng `iverilog`.
   Riêng `LAB_2` có đủ 5 file `.bit` (đã nạp lên Nexys A7).
-- Ba mạch tuần tự (D flip-flop, bộ đếm, máy trạng thái) **không kiểm được bằng Logisim headless** vì
-  chế độ bảng chân lý của Logisim chỉ phân tích mạch tổ hợp. Chúng được kiểm bằng testbench `iverilog`
-  và dạng sóng `wave.png`.
+- Chế độ bảng chân lý của Logisim (`-tty table`) chỉ phân tích được **mạch tổ hợp**.
+  Ba mạch tuần tự (D flip-flop, bộ đếm, máy trạng thái) được dựng bằng **IC thật**
+  (74LS74, 74LS08, 74LS32) và kiểm bằng **chế độ test vector** (`logisim_vectors.txt`);
+  hành vi đầy đủ được kiểm bằng mô phỏng SPICE và testbench `iverilog`.
 - Chi tiết về cách dùng Logisim / LTspice / ngspice: `tools/README.md`.
 """
 
@@ -235,6 +236,8 @@ def main():
                 files.append("Logisim: " + ", ".join("`%s`" % f for f in r["circ"]))
             if r["logisim"]:
                 files.append("`logisim_table.txt`")
+            if (folder / "logisim_vectors.txt").exists():
+                files.append("`logisim_vectors.txt`")
             if r["cir"]:
                 files.append("SPICE: " + ", ".join("`%s`" % f for f in r["cir"]))
             if r["spice"]:

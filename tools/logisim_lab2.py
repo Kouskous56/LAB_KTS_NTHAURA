@@ -87,27 +87,40 @@ def exp_2_3(c):
 
 
 def mux_74ls151(c):
-    """74LS151 (8:1 mux): Y = Sigma(1,2,4,7), Ybar = ~Y"""
+    """74LS151 (8:1 mux): Y = Sigma(1,2,4,7), W = ~Y"""
     inputs(c, ["x", "y", "z"])
-    nx, ny, nz = inverters(c, 250, 100, ["x", "y", "z"])
-    m = minterms(c, 650, 120, (nx, ny, nz))
-    # the data inputs are 0,1,1,0,1,0,0,1 -> only the minterms 1,2,4,7 are kept
-    c.gate_net(900, 200, "OR", [m[1], m[2], m[4], m[7]], "f", inputs=4)
-    c.gate_net(1100, 200, "NOT", ["f"], "fbar")
-    c.output_net(1200, 200, "f")
-    c.probe(1140, 200)
+    # I = 8'b10010110 (I7..I0)  ->  D0=0 D1=1 D2=1 D3=0 D4=1 D5=0 D6=0 D7=1
+    # select S = {x,y,z} -> C = x, B = y, A = z ; enable nG = 0
+    c.ttl(400, 400, "74151", {
+        0: "0", 1: "1", 2: "1", 3: "0",        # D3 D2 D1 D0
+        4: "f", 5: "fbar", 6: "0",            # Y W nG
+        7: "x", 8: "y", 9: "z",                # C B A
+        10: "1", 11: "0", 12: "0", 13: "1",    # D7 D6 D5 D4
+        14: "0", 15: "1"}, label="U1")         # GND VCC
+    c.output_net(700, 200, "f")
+    c.probe(760, 200)
 
 
 def dec_74ls138(c):
     """74LS138 (3:8 decoder): outputs Y0..Y7 active low, f = Sigma(0,2,5,7)"""
     inputs(c, ["x", "y", "z"])
-    nx, ny, nz = inverters(c, 250, 100, ["x", "y", "z"])
-    m = minterms(c, 650, 120, (nx, ny, nz))
+    # select A = {x,y,z} -> C = x, B = y, A = z
+    # enable: nEN2A = 0, nEN2B = 0, EN1 = 1
+    c.ttl(400, 400, "74138", {
+        0: "z", 1: "y", 2: "x",                # A B C
+        3: "0", 4: "0", 5: "1",                # nEN2A nEN2B EN1
+        6: "nY7",
+        7: "nY6", 8: "nY5", 9: "nY4", 10: "nY3", 11: "nY2", 12: "nY1", 13: "nY0",
+        14: "0", 15: "1"}, label="U1")
+    # f = ~(nY0 . nY2 . nY5 . nY7) : 2 x AND (74LS08) + 1 x NAND (74LS00)
+    c.ttl(700, 600, "7408", {0: "nY0", 1: "nY2", 2: "t1",
+                             3: "nY5", 4: "nY7", 5: "t2",
+                             12: "0", 13: "1"}, label="U2")
+    c.ttl(900, 600, "7400", {0: "t1", 1: "t2", 2: "f",
+                             12: "0", 13: "1"}, label="U3")
+    c.output_net(1100, 200, "f")
     for k in range(8):
-        c.gate_net(900, 100 + 60 * k, "NOT", [m[k]], "y%d" % k)
-        c.probe(940, 100 + 60 * k)
-    c.gate_net(900, 700, "OR", [m[0], m[2], m[5], m[7]], "f", inputs=4)
-    c.output_net(1000, 700, "f")
+        c.probe(460, 380 + 20 * k)
 
 
 JOBS = [

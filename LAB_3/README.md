@@ -98,8 +98,10 @@ Ngoài testbench `iverilog`, mỗi bài còn có minh chứng từ **Logisim Evo
 Chạy lại toàn bộ:
 
 ```powershell
-python tools\logisim_lab3.py
-python tools\spice_lab3.py
+python tools\logisim_lab3.py       # Full Adder + bo cong 4 bit
+python tools\logisim_lab3_seq.py   # mach tuan tu bang IC that cua Logisim
+python tools\spice_lab3.py         # Full Adder + bo cong 4 bit
+python tools\spice_lab3_seq.py     # DFF, bo dem, may trang thai
 python tools\render_all.py
 ```
 
@@ -109,3 +111,39 @@ Chi tiết cách dùng từng công cụ: `tools/README.md`.
 |---|---|
 | EXP_1 | `EXP_1_full_adder/full_adder.circ` + `logisim_table.txt` (Logisim, 8/8 đúng) |
 | EXP_2 | `EXP_2_addsub_4bit/adder4.cir` (bộ cộng 4 bit ripple, Figure 3.1), mô phỏng 16 tổ hợp, PASS |
+| EXP_3 | `EXP_3_dff_74ls74/dff74ls74.circ` (IC thật **74LS74** của thư viện TTL) + `logisim_vectors.txt` (5/5 dòng) + `dff74ls74.cir` (mô hình SPICE của 74LS74, **11/11 dòng Table 3.5** ở cả LTspice và ngspice) |
+| EXP_4 | `EXP_4_counter_0_7/counter_0_7.circ` (**74LS74** + **74LS08** làm cổng cho phép A, B) + `logisim_vectors.txt` + `counter_0_7.cir` (mô phỏng bộ đếm 0 đến 7, PASS ở cả hai simulator) |
+| EXP_5 | `EXP_5_state_machine/fsm_fig34.circ` (**74LS74** + **74LS08** + **74LS32**) + `logisim_vectors.txt` + `fsm_fig34.cir` (chuỗi trạng thái A,A,B,D,A,A,A,B, PASS ở cả hai simulator) |
+
+## Mạch Logisim dùng IC thật
+
+Các mạch tuần tự được dựng bằng **IC thật của thư viện TTL** trong Logisim Evolution
+(lib `A`), đúng như sơ đồ trong manual:
+
+| Bài | IC dùng trong Logisim |
+|---|---|
+| EXP_3 | 74LS74 (1 flip-flop, flip-flop còn lại để dự phòng) |
+| EXP_4 | 74LS74 × 2 + 74LS08 × 2 (cổng cho phép clock theo A, B) |
+| EXP_5 | 74LS74 (2 trạng thái) + 74LS08 (2 cổng AND) + 74LS32 (1 cổng OR) |
+
+Mỗi file `.circ` mở trực tiếp bằng Logisim Evolution để mô phỏng tay trên máy thật
+(bấm nút đồng hồ trong thanh công cụ để xem flip-flop đổi trạng thái).
+
+**Giới hạn của chế độ kiểm tự động**: `-tty table` chỉ phân tích được mạch tổ hợp, còn
+chế độ test vector (`-w`) **khởi tạo lại trạng thái mạch ở mỗi dòng vector**, nên chỉ
+kiểm được các dòng có cạnh clock hoặc có preset/clear tác động (file
+`logisim_vectors.txt` trong mỗi thư mục bài). Hành vi đầy đủ của ba mạch tuần tự được
+kiểm bằng mô phỏng SPICE và testbench `iverilog`.
+
+## Mô hình SPICE của 74LS74
+
+`tools/spice_lab3_seq.py` dùng chung một sub-circuit `dff` cho cả ba mạch:
+
+- Cổng tắc `SW` mở trong một **xung hẹp sinh ở cạnh dây dương** của clock → lấy mẫu D.
+- Tụ điện 5 pF giữ trạng thái, điện trở 1 TΩ chống rò.
+- Preset/clear bất đồng bộ mức thấp ép trực tiếp trạng thái (PRE ưu tiên).
+- Nhánh RC trì hoãn 5 ns cho bản sao trạng thái, phá vỡ vòng phản hồi `D = ~Q`
+  (nếu không, mô phỏng sẽ không có lời giải ổn định).
+
+Vì dùng toàn bộ phần tử sơ cấp của SPICE nên **cùng một netlist chạy được ở LTspice lẫn
+ngspice** (ngspice không có hàm `if()`/`delay()` trong nguồn hành vi).
