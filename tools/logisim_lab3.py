@@ -59,23 +59,93 @@ def full_adder(c):
     c.pin(740, 300, "Co", output=True, facing="west")
 
 
+def fa_block(c, ox, oy, ain, bin_, cin, sout, cout):
+    """One full adder built from 2 XOR, 2 AND, 1 OR, connected with tunnels."""
+    def tun(x, y, label, facing="east"):
+        c.tunnel(x, y, label, facing)
+
+    # T1 = ain xor bin_
+    c.gate(ox, oy, "XOR", size=SIZE)
+    tun(ox - 60, oy - 20, ain)
+    tun(ox - 60, oy + 20, bin_)
+    c.wire(ox, oy, ox + 40, oy)
+    tun(ox + 40, oy, sout + "_t", "west")
+
+    # S = T1 xor cin
+    c.gate(ox + 200, oy, "XOR", size=SIZE)
+    tun(ox + 140, oy - 20, sout + "_t")
+    tun(ox + 140, oy + 20, cin)
+    c.wire(ox + 200, oy, ox + 240, oy)
+    tun(ox + 240, oy, sout, "west")
+
+    # x = ain and bin_
+    c.gate(ox, oy + 200, "AND", size=SIZE)
+    tun(ox - 50, oy + 180, ain)
+    tun(ox - 50, oy + 220, bin_)
+    c.wire(ox, oy + 200, ox + 40, oy + 200)
+    tun(ox + 40, oy + 200, sout + "_x", "west")
+
+    # y = T1 and cin
+    c.gate(ox + 200, oy + 200, "AND", size=SIZE)
+    tun(ox + 150, oy + 180, sout + "_t")
+    tun(ox + 150, oy + 220, cin)
+    c.wire(ox + 200, oy + 200, ox + 240, oy + 200)
+    tun(ox + 240, oy + 200, sout + "_y", "west")
+
+    # cout = x + y
+    c.gate(ox + 400, oy + 200, "OR", size=SIZE)
+    tun(ox + 350, oy + 180, sout + "_x")
+    tun(ox + 350, oy + 220, sout + "_y")
+    c.wire(ox + 400, oy + 200, ox + 440, oy + 200)
+    tun(ox + 440, oy + 200, cout, "west")
+
+
+def adder4(c):
+    """4 bit ripple adder (Figure 3.1): four full adders in series."""
+    for k, name in enumerate(["A0", "A1", "A2", "A3", "B0", "B1", "B2", "B3", "Ci"]):
+        y = 60 + 40 * k
+        c.pin(100, y, name)
+        c.wire(100, y, 140, y)
+        c.tunnel(140, y, name, "west")
+
+    carry = "Ci"
+    for i in range(4):
+        fa_block(c, 250 + 500 * i, 100, "A%d" % i, "B%d" % i, carry,
+                 "S%d" % i, "C%d" % (i + 1))
+        carry = "C%d" % (i + 1)
+
+    for k, name in enumerate(["S3", "S2", "S1", "S0"]):
+        y = 80 + 40 * k
+        c.wire(2200, y, 2240, y)
+        c.tunnel(2200, y, name, "east")
+        c.pin(2240, y, name, output=True, facing="west")
+    c.wire(2200, 300, 2240, 300)
+    c.tunnel(2200, 300, "C4", "east")
+    c.pin(2240, 300, "C4", output=True, facing="west")
+
+
 JOBS = [
-    ("PRELAB_3/EXP_3_1", "full_adder"),
-    ("LAB_3/EXP_1_full_adder", "full_adder"),
+    ("PRELAB_3/EXP_3_1", "full_adder", "full_adder.circ"),
+    ("LAB_3/EXP_1_full_adder", "full_adder", "full_adder.circ"),
+    ("PRELAB_3/EXP_3_2", "adder4", "adder4.circ"),
+    ("LAB_3/EXP_2_addsub_4bit", "adder4", "adder4.circ"),
 ]
 
 
 def main():
-    for rel, kind in JOBS:
+    for rel, kind, circ_name in JOBS:
         d = ROOT / rel
         c = Circ()
         globals()[kind](c)
-        circ = d / "full_adder.circ"
+        circ = d / circ_name
         c.save(circ)
         out = run_tty(circ)
         (d / "logisim_table.txt").write_text(out, encoding="utf-8")
-        print(f"--- {rel} ---")
-        print(out.strip())
+        rows = out.strip().splitlines()
+        print(f"--- {rel} ({circ_name}) ---")
+        print("\n".join(rows[:6]))
+        if len(rows) > 6:
+            print("... %d rows total" % (len(rows) - 1))
 
 
 if __name__ == "__main__":
