@@ -20,11 +20,11 @@ python tools\verify_all.py -o REPORT_EVIDENCE.md
 ## Kết quả kiểm tra
 | Bài | iverilog | Logisim | SPICE (LTspice/ngspice) | .bit | ảnh |
 |---|---|---|---|---|---|
-| EXP_2_1 - Full Adder (Table 2.2) | PASS | PASS | PASS/PASS | có | 2 |
-| EXP_2_2 - F = sum m(0,1,3,4,7) | PASS | PASS | PASS/PASS | có | 2 |
-| EXP_2_3 - Figure 2.4, F = x&~y | PASS | PASS | PASS/PASS | có | 2 |
-| EXP_2_4 - 74LS151, f = sum m(1,2,4,7) | PASS | PASS | PASS/PASS | có | 2 |
-| EXP_2_5 - 74LS138, f = sum m(0,2,5,7) | PASS | PASS | PASS/PASS | có | 2 |
+| EXP_2_1 - Full Adder (Table 2.2) | PASS | PASS | PASS/PASS | có | 3 |
+| EXP_2_2 - F = sum m(0,1,3,4,7) | PASS | PASS | PASS/PASS | có | 3 |
+| EXP_2_3 - Figure 2.4, F = x&~y | PASS | PASS | PASS/PASS | có | 3 |
+| EXP_2_4 - 74LS151, f = sum m(1,2,4,7) | PASS | PASS | PASS/PASS | có | 3 |
+| EXP_2_5 - 74LS138, f = sum m(0,2,5,7) | PASS | PASS | PASS/PASS | có | 3 |
 | LAB_3 EXP_1 - Full Adder (Table 3.3) | PASS | PASS | PASS/PASS | - | 4 |
 | LAB_3 EXP_2 - 4-bit Adder/Subtractor | PASS | PASS | PASS/PASS | - | 4 |
 | LAB_3 EXP_3 - D flip-flop 74LS74 (Table 3.5) | PASS | - | - | - | 2 |
@@ -44,11 +44,11 @@ python tools\verify_all.py -o REPORT_EVIDENCE.md
 
 | Bài | File minh chứng |
 |---|---|
-| EXP_2_1 - Full Adder (Table 2.2) | Logisim: `exp_2_1.circ`<br>`logisim_table.txt`<br>SPICE: `exp_2_1.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `wave.png`, `spice_wave.png` |
-| EXP_2_2 - F = sum m(0,1,3,4,7) | Logisim: `exp_2_2.circ`<br>`logisim_table.txt`<br>SPICE: `exp_2_2.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `wave.png`, `spice_wave.png` |
-| EXP_2_3 - Figure 2.4, F = x&~y | Logisim: `exp_2_3.circ`<br>`logisim_table.txt`<br>SPICE: `exp_2_3.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `wave.png`, `spice_wave.png` |
-| EXP_2_4 - 74LS151, f = sum m(1,2,4,7) | Logisim: `mux_74ls151.circ`<br>`logisim_table.txt`<br>SPICE: `mux_74ls151.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `wave.png`, `spice_wave.png` |
-| EXP_2_5 - 74LS138, f = sum m(0,2,5,7) | Logisim: `dec_74ls138.circ`<br>`logisim_table.txt`<br>SPICE: `dec_74ls138.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `wave.png`, `spice_wave.png` |
+| EXP_2_1 - Full Adder (Table 2.2) | Logisim: `exp_2_1.circ`<br>`logisim_table.txt`<br>SPICE: `exp_2_1.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `wave.png`, `spice_wave.png` |
+| EXP_2_2 - F = sum m(0,1,3,4,7) | Logisim: `exp_2_2.circ`<br>`logisim_table.txt`<br>SPICE: `exp_2_2.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `wave.png`, `spice_wave.png` |
+| EXP_2_3 - Figure 2.4, F = x&~y | Logisim: `exp_2_3.circ`<br>`logisim_table.txt`<br>SPICE: `exp_2_3.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `wave.png`, `spice_wave.png` |
+| EXP_2_4 - 74LS151, f = sum m(1,2,4,7) | Logisim: `mux_74ls151.circ`<br>`logisim_table.txt`<br>SPICE: `mux_74ls151.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `wave.png`, `spice_wave.png` |
+| EXP_2_5 - 74LS138, f = sum m(0,2,5,7) | Logisim: `dec_74ls138.circ`<br>`logisim_table.txt`<br>SPICE: `dec_74ls138.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `wave.png`, `spice_wave.png` |
 | LAB_3 EXP_1 - Full Adder (Table 3.3) | Logisim: `full_adder.circ`<br>`logisim_table.txt`<br>SPICE: `full_adder.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `application_circuit.png`, `wave.png`, `spice_wave.png` |
 | LAB_3 EXP_2 - 4-bit Adder/Subtractor | Logisim: `adder4.circ`<br>`logisim_table.txt`<br>SPICE: `adder4.cir`<br>`spice_table_ltspice.txt`, `spice_table_ngspice.txt`<br>ảnh: `logic_diagram.png`, `application_circuit.png`, `wave.png`, `spice_wave.png` |
 | LAB_3 EXP_3 - D flip-flop 74LS74 (Table 3.5) | ảnh: `logic_diagram.png`, `wave.png` |
