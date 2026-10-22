@@ -103,31 +103,11 @@ Ngoài testbench `iverilog`, mỗi bài còn có minh chứng từ **Logisim Evo
 | File | Nội dung |
 |---|---|
 | `*.circ` | sơ đồ mạch trong Logisim Evolution, mở trực tiếp được bằng Logisim |
-| `logisim_table.txt` | bảng chân lý do chính Logisim mô phỏng |
 | `*.cir` | netlist SPICE, mở được bằng cả LTspice lẫn ngspice |
-| `spice_table_ltspice.txt` | bảng chân lý lấy từ mô phỏng LTspice (có dòng `RESULT: PASS`) |
-| `spice_table_ngspice.txt` | bảng chân lý lấy từ mô phỏng ngspice (có dòng `RESULT: PASS`) |
-| `spice_wave.png` | dạng sóng mô phỏng, style GTKWave |
-| `logic_diagram.png`, `application_circuit.png`, `wave.png` | hình vẽ logic đồ, mạch ứng dụng, dạng sóng Icarus |
 
-Chạy lại toàn bộ:
-
-```powershell
-python tools\logisim_lab3.py       # Full Adder + bo cong 4 bit
-python tools\logisim_lab3_seq.py   # mach tuan tu bang IC that cua Logisim
-python tools\spice_lab3.py         # Full Adder + bo cong 4 bit
-python tools\spice_lab3_seq.py     # bo dem, may trang thai
-python tools\render_all.py
-```
-
-Chi tiết cách dùng từng công cụ: `tools/README.md`.
-
-| Bài | Minh chứng thêm |
-|---|---|
-| EXP_3_1 | `EXP_3_1/full_adder.circ` + `logisim_table.txt` (Logisim, 8/8 đúng) |
-| EXP_3_2 | `EXP_3_2/adder4.cir` (bộ cộng 4 bit ripple, Figure 3.1), mô phỏng 16 tổ hợp, PASS |
-| EXP_3_3 | `EXP_3_3/counter_0_7.circ` (**74LS74** thật) + `logisim_vectors.txt` + `counter_0_7.cir` (đếm 0 đến 7 rồi về 0, PASS ở cả LTspice và ngspice) |
-| EXP_3_4 | `EXP_3_4/fsm_fig34.circ` (**74LS74** + **74LS08** + **74LS32** thật) + `logisim_vectors.txt` + `fsm_fig34.cir` (chuỗi trạng thái A,A,B,D,A,A,A,B, PASS ở cả hai simulator) |
+Bảng chân lý do Logisim và SPICE sinh ra, cùng dạng sóng và sơ đồ logic, được giữ ở
+máy cá nhân của tác giả (không đưa lên repo) vì chúng là **kết quả sinh tự động**;
+đối chiếu với manual đã được ghi lại trong các mục bên dưới.
 
 ## Mạch Logisim dùng IC thật
 
@@ -136,22 +116,20 @@ Các mạch tuần tự được dựng bằng **IC thật của thư viện TTL
 
 | Bài | IC dùng trong Logisim |
 |---|---|
-| EXP_3 | 74LS74 (1 flip-flop, flip-flop còn lại để dự phòng) |
-| EXP_4 | 74LS74 × 2 + 74LS08 × 2 (cổng cho phép clock theo A, B) |
-| EXP_5 | 74LS74 (2 trạng thái) + 74LS08 (2 cổng AND) + 74LS32 (1 cổng OR) |
+| EXP_3_3 | 74LS74 × 2 (3 tầng đếm, mỗi package chứa 2 flip-flop) |
+| EXP_3_4 | 74LS74 (2 trạng thái) + 74LS08 (2 cổng AND) + 74LS32 (1 cổng OR) |
 
 Mỗi file `.circ` mở trực tiếp bằng Logisim Evolution để mô phỏng tay trên máy thật
 (bấm nút đồng hồ trong thanh công cụ để xem flip-flop đổi trạng thái).
 
 **Giới hạn của chế độ kiểm tự động**: `-tty table` chỉ phân tích được mạch tổ hợp, còn
 chế độ test vector (`-w`) **khởi tạo lại trạng thái mạch ở mỗi dòng vector**, nên chỉ
-kiểm được các dòng có cạnh clock hoặc có preset/clear tác động (file
-`logisim_vectors.txt` trong mỗi thư mục bài). Hành vi đầy đủ của ba mạch tuần tự được
-kiểm bằng mô phỏng SPICE và testbench `iverilog`.
+kiểm được các dòng có cạnh clock hoặc có preset/clear tác động. Hành vi đầy đủ của ba
+mạch tuần tự được kiểm bằng mô phỏng SPICE và testbench `iverilog`.
 
 ## Mô hình SPICE của 74LS74
 
-`tools/spice_lab3_seq.py` dùng chung một sub-circuit `dff` cho cả ba mạch:
+Bộ script dùng chung một sub-circuit `dff` cho cả ba mạch (script ở máy cá nhân, không có trong repo):
 
 - Cổng tắc `SW` mở trong một **xung hẹp sinh ở cạnh dây dương** của clock → lấy mẫu D.
 - Tụ điện 5 pF giữ trạng thái, điện trở 1 TΩ chống rò.
@@ -161,3 +139,30 @@ kiểm bằng mô phỏng SPICE và testbench `iverilog`.
 
 Vì dùng toàn bộ phần tử sơ cấp của SPICE nên **cùng một netlist chạy được ở LTspice lẫn
 ngspice** (ngspice không có hàm `if()`/`delay()` trong nguồn hành vi).
+
+## Kết quả kiểm chứng
+
+| Bài | Testbench `iverilog` | Logisim | SPICE (LTspice / ngspice) | Bitstream |
+|---|---|---|---|---|
+| EXP_3_1 | ALL 8 TESTS PASS | 8/8 dòng khớp Table 3.1 | PASS / PASS | không build |
+| EXP_3_2 | ALL TESTS PASS (24 lượt: 12 cặp Table 3.4 × 2 mode) | 512/512 dòng | PASS / PASS (16 tổ hợp) | không build |
+| EXP_3_3 | ALL TESTS PASS | 2/2 dòng test vector (IC thật **74LS74**) | PASS / PASS, đếm 0→7 rồi về 0 | không build |
+| EXP_3_4 | ALL TESTS PASS | 2/2 dòng test vector (IC thật **74LS74** + **74LS08** + **74LS32**) | PASS / PASS, chuỗi trạng thái A,A,B,D,A,A,A,B | không build |
+
+Kết quả mô phỏng bộ đếm EXP_3_3: `000 → 001 → 010 → 011 → 100 → 101 → 110 → 111 → 000`.
+
+## File trong mỗi thư mục bài
+
+| File | Nội dung |
+|---|---|
+| `*.sv` | mô hình SystemVerilog (module thiết kế + testbench `tb.sv` + `top_module.sv` cho bo Nexys A7) |
+| `Nexys-A7-100T-Master.xdc` | ràng buộc chân cho bo |
+| `*.circ` | sơ đồ mạch trong **Logisim Evolution** (mở trực tiếp được, dùng IC thật của thư viện TTL) |
+| `*.cir` | netlist SPICE của cùng mạch (chạy được bằng cả LTspice lẫn ngspice) |
+| `project_*/` | project Vivado (chỉ có ở LAB_2, đã build sẵn `.bit`) |
+
+> **Lưu ý**: ảnh minh chứng (`logic_diagram.png`, `application_circuit.png`,
+> `state_diagram.png`, `wave.png`, `spice_wave.png`), bảng kết quả thô
+> (`logisim_table.txt`, `spice_table_*.txt`, `logisim_vectors.txt`) và bộ script
+> `tools/` được sinh trên máy cá nhân của tác giả, **không đưa lên repo**. Repo giữ
+> mã thiết kế, sơ đồ Logisim, netlist SPICE và tài liệu.

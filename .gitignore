@@ -1,6 +1,22 @@
-# ===== .gitignore (v3) =====
-# Policy: track everything EXCEPT derived (non-Vivado) files.
+# ===== .gitignore (v4) =====
+# Policy: the repo carries the DESIGN and the NOTES.
+#   tracked : *.sv, *.xdc, Vivado projects (*.bit), Logisim schematics (*.circ),
+#             SPICE netlists (*.cir), notes (*.md)
+#   local   : tools/ (python scripts), generated images (*.png),
+#             generated evidence tables (*.txt), waveforms (*.vcd)
+#
 # Vivado project files (.xpr, .runs, .sim, .hw, .bit, .dcp, .rpt, .jou, .log) are kept.
+
+# --- python tooling: kept on the author's machine only ---
+tools/
+
+# --- generated images: logic diagrams, waveforms, application circuits ---
+**/*.png
+
+# --- generated evidence tables (Logisim truth table, SPICE result table) ---
+**/logisim_table.txt
+**/logisim_vectors.txt
+**/spice_table_*.txt
 
 # --- bitforge artifacts (never track) ---
 **/*bitforge*/

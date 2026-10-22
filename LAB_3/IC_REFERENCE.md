@@ -42,6 +42,11 @@ DIP-14. Mỗi vi mạch chứa **2** flip-flop độc lập.
 Chú thích Note 1 của TI: *"this configuration is nonstable; that is, it will not persist when either
 the preset or clear inputs return to their inactive (HIGH) level."*
 
+> **Lưu ý khi mô phỏng**: mô hình 74LS74 của thư viện TTL trong Logisim cho ngõ ra `U` (không
+> xác định) ở trường hợp PR̅ = CLR̅ = L, vì Logisim không mô phỏng trạng thái nonstable.
+> Vì vậy dòng này được kiểm bằng testbench `iverilog` và mô hình SPICE (cả hai đều cho
+> Q = Q̅ = 1) chứ không kiểm bằng Logisim.
+
 ### Đặc tính quan trọng
 - Kích thích **cạnh lên** (positive-going transition) — đúng như manual nhấn mạnh.
 - PR/CLR là **bất đồng bộ theo mức**: TI viết rõ *"A low level at the preset or clear inputs sets or

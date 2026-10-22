@@ -114,36 +114,56 @@ Bộ giải mã 3→8, ngõ ra tích cực mức thấp; cho phép `E1 = E2 = 0`
 ## Chạy lại
 
 ```powershell
-# testbench
-cd EXP_2_1
+cd LAB_2\EXP_2_1
 iverilog -g2012 -o tb.vvp *.sv
 vvp tb.vvp
-
-# Logisim Evolution (headless) -> logisim_table.txt
-python ..\..\tools\logisim_lab2.py
-
-# SPICE: LTspice + ngspice -> spice_table_*.txt, spice_wave.png
-python ..\..\tools\spice_lab2.py
-
-# ảnh dạng sóng từ Icarus
-python ..\..\tools\render_all.py
 ```
 
-Kiểm tra tất cả 14 project của cả ba lab:
+Kiểm tra cả 14 project của ba lab:
 
 ```powershell
-python tools\verify_all.py -o REPORT_EVIDENCE.md
+python tools\verify_all.py
 ```
 
-## File minh chứng trong mỗi thư mục bài
+> Bộ script `tools/` và các ảnh/bảng kết quả thô chỉ nằm ở máy cá nhân của tác giả,
+> không có trong repo. Repo giữ mã thiết kế, sơ đồ Logisim, netlist SPICE và tài liệu.
+
+## Kết quả kiểm chứng
+
+Mỗi mạch được kiểm bằng **ba công cụ độc lập**: testbench `iverilog`, mô phỏng Logisim
+Evolution (bảng chân lý do chính Logisim sinh ra) và mô phỏng SPICE chạy trên **cả LTspice
+lẫn ngspice** (cùng một netlist).
+
+| Bài | Testbench `iverilog` | Logisim | SPICE (LTspice / ngspice) | Bitstream |
+|---|---|---|---|---|
+| EXP_2_1 | ALL 8 TESTS PASS | 8/8 dòng khớp Table 2.2 | PASS / PASS | `top_module.bit` |
+| EXP_2_2 | ALL 8 TESTS PASS | 8/8 dòng khớp Table 2.3 | PASS / PASS | `top_module.bit` |
+| EXP_2_3 | ALL 8 TESTS PASS | 8/8 dòng, F khớp Fs | PASS / PASS | `top_module.bit` |
+| EXP_2_4 | ALL 8 TESTS PASS | 8/8 dòng, dùng IC thật **74LS151** | PASS / PASS | `top_module.bit` |
+| EXP_2_5 | ALL 8 TESTS PASS | 8/8 dòng, dùng IC thật **74LS138** | PASS / PASS | `top_module.bit` |
+
+Bảng chân lý đầy đủ của từng bài đã ghi ở mục trên. Dạng sóng mô phỏng (Icarus Verilog
+và SPICE) và sơ đồ logic được sinh ở máy cá nhân, không đưa lên repo.
+
+### Ghi chú về hai bài dùng IC thật
+
+- **EXP_2_4 (74LS151)**: `I = 8'b10010110` (I7..I0), chọn `S = {x,y,z}` tức `C=x, B=y, A=z`,
+  cho phép `nG = 0`. Ngõ ra `Y` là `f`, `W` là ngõ ra đảo.
+- **EXP_2_5 (74LS138)**: cho phép `nEN2A = 0`, `nEN2B = 0`, `EN1 = 1`; chọn `A = {x,y,z}`
+  (`C=x, B=y, A=z`). Vì ngõ ra mức thấp nên `f = ~(Y0.Y2.Y5.Y7)`, dựng bằng
+  **74LS08** (hai cổng AND) + **74LS00** (một cổng NAND).
+
+## File trong mỗi thư mục bài
 
 | File | Nội dung |
 |---|---|
-| `*.circ` | sơ đồ mạch trong Logisim Evolution (mở trực tiếp được) |
-| `logisim_table.txt` | bảng chân lý do Logisim mô phỏng, đã đối chiếu với manual |
-| `*.cir` | netlist SPICE, chạy được cả LTspice lẫn ngspice |
-| `spice_table_ltspice.txt` | bảng chân lý từ LTspice (`RESULT: PASS`) |
-| `spice_table_ngspice.txt` | bảng chân lý từ ngspice (`RESULT: PASS`) |
-| `spice_wave.png` | dạng sóng mô phỏng SPICE, style GTKWave |
-| `wave.png` | dạng sóng Icarus Verilog, style GTKWave |
-| `project_*/…/top_module.bit` | bitstream nạp Nexys A7 |
+| `*.sv` | mô hình SystemVerilog (module thiết kế + testbench `tb.sv` + `top_module.sv` cho bo Nexys A7) |
+| `Nexys-A7-100T-Master.xdc` | ràng buộc chân cho bo |
+| `*.circ` | sơ đồ mạch trong **Logisim Evolution** (mở trực tiếp được, dùng IC thật của thư viện TTL) |
+| `*.cir` | netlist SPICE của cùng mạch (chạy được bằng cả LTspice lẫn ngspice) |
+| `project_*/` | project Vivado (chỉ có ở LAB_2, đã build sẵn `.bit`) |
+
+> **Lưu ý**: ảnh minh chứng (`logic_diagram.png`, `application_circuit.png`, `wave.png`,
+> `spice_wave.png`) và bảng kết quả thô (`logisim_table.txt`, `spice_table_*.txt`) được
+> sinh bằng bộ script trên máy cá nhân của tác giả, **không đưa lên repo**. Repo giữ
+> mã thiết kế, sơ đồ Logisim, netlist SPICE và tài liệu.
