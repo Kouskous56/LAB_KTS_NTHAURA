@@ -1,0 +1,15 @@
+* EXP_2_5 - 74LS138: f = sum m(0,2,5,7)
+* gate level behavioural model, runs in LTspice and ngspice
+V_X x 0 PWL(0n 0 399n 0 400n 5 799n 5 800n 0)
+V_Y y 0 PWL(0n 0 199n 0 200n 5 399n 5 400n 0 599n 0 600n 5 799n 5 800n 0)
+V_Z z 0 PWL(0n 0 99n 0 100n 5 199n 5 200n 0 299n 0 300n 5 399n 5 400n 0 499n 0 500n 5 599n 5 600n 0 699n 0 700n 5 799n 5 800n 0)
+B_NX nx 0 V = (V(x) > 2.5) ? 0 : 5
+B_NY ny 0 V = (V(y) > 2.5) ? 0 : 5
+B_NZ nz 0 V = (V(z) > 2.5) ? 0 : 5
+B_M0 m0 0 V = V(nx)+V(ny)+V(nz) > 12.5 ? 5 : 0
+B_M2 m2 0 V = V(nx)+V(y)+V(nz) > 12.5 ? 5 : 0
+B_M5 m5 0 V = V(x)+V(ny)+V(z) > 12.5 ? 5 : 0
+B_M7 m7 0 V = V(x)+V(y)+V(z) > 12.5 ? 5 : 0
+B_F  f  0 V = V(m0)+V(m2)+V(m5)+V(m7) > 2.5 ? 5 : 0
+.tran 2n 800n
+.end

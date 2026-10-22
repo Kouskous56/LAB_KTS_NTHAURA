@@ -1,0 +1,11 @@
+SPICE simulation (ngspice), EXP_2_2 - F = sum m(0,1,3,4,7)
+V(x) V(y) V(z) V(F)
+0 0 0 1
+0 0 1 1
+0 1 0 0
+0 1 1 1
+1 0 0 1
+1 0 1 0
+1 1 0 0
+1 1 1 1
+RESULT: PASS

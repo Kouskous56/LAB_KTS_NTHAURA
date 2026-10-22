@@ -5,12 +5,15 @@ Mọi script trong thư mục này chạy **hoàn toàn bằng terminal**, khôn
 | Script | Việc | Kết quả |
 |---|---|---|
 | `logisim.py` | Sinh file `.circ` cho Logisim Evolution, chạy Logisim headless | `.circ`, bảng chân lý |
-| `logisim_lab3.py` | Dựng Full Adder trong Logisim + chạy `-tty table` | `full_adder.circ`, `logisim_table.txt` |
+| `logisim_lab2.py` | Dựng 5 mạch Lab 2 trong Logisim + chạy `-tty table` | `*.circ`, `logisim_table.txt` |
+| `logisim_lab3.py` | Dựng Full Adder và bộ cộng 4 bit trong Logisim | `*.circ`, `logisim_table.txt` |
 | `spice.py` | Chạy LTspice / ngspice batch, đọc file `.raw` | dữ liệu mô phỏng |
-| `spice_lab3.py` | Mô phỏng SPICE Full Adder và bộ cộng 4 bit | `*.cir`, `spice_table_*.txt`, `spice_wave.png` |
+| `spice_lab2.py` | Mô phỏng SPICE cho 5 bài Lab 2 | `*.cir`, `spice_table_*.txt`, `spice_wave.png` |
+| `spice_lab3.py` | Mô phỏng SPICE cho Full Adder và bộ cộng 4 bit | `*.cir`, `spice_table_*.txt`, `spice_wave.png` |
+| `verify_all.py` | Kiểm tra 14 project (iverilog + Logisim + SPICE + `.bit` + ảnh) | bảng tổng hợp, `REPORT_EVIDENCE.md` |
 | `vcd2png.py` | Vẽ waveform VCD theo style GTKWave | `wave.png`, `spice_wave.png` |
 | `schematic.py`, `draw_lab3.py` | Vẽ logic diagram / application circuit / state diagram | `logic_diagram.png`, ... |
-| `render_all.py` | Chạy lại toàn bộ ảnh của 9 project | tất cả PNG |
+| `render_all.py` | Chạy lại toàn bộ ảnh của 14 project | tất cả PNG |
 
 ## 1. Logisim Evolution (headless)
 
@@ -42,6 +45,21 @@ python tools\logisim_lab3.py
   thay vì kéo dây dài.
 - Pin đầu ra phải có `<a name="output" val="true"/>`; nếu để trống Logisim tự sinh tên
   `x`, `y` trong bảng.
+- **Cổng NOT không có thuộc tính `size`**: nếu ghi thuộc tính này, Logisim bỏ hẳn component
+  và ngõ ra báo `U`. Cổng NOT luôn rộng 30 px, cổng vào ở `x − 30`.
+- **Cổng 4 ngõ vào không đều nhau**: Logisim đặt cổng vào ở `−20, −10, +10, +20` (với size 50),
+  không phải chia đều. Script `logisim.py` dùng đúng công thức của Logisim cho mọi số ngõ vào.
+- **NAND/NOR rộng thêm 10 px** do bong bóng đảo ở ngõ ra, nên cổng vào nằm ở `x − size − 10`
+  (giống XOR).
+- Bảng chân lý liệt kê tổ hợp theo thứ tự **ngược cột**: ngõ vào cuối cùng đổi nhanh nhất
+  (`Ci` trong Full Adder, `Ci` trong bộ cộng 4 bit). Script kiểm tra phải dựng bảng kỳ vọng
+  theo đúng quy tắc này.
+- **Pin có nhãn `Y` bị Logisim đổi tên** trong bảng (thành `u`) – nên đặt tên ngõ ra theo tín
+  hiệu của testbench (`f`, `F`).
+- Nhiều ngõ ra làm thứ tự cột của bảng khó đọc: chỉ để **một pin đầu ra** cho bảng chân lý,
+  các ngõ ra khác dùng **Probe** (Probe không xuất hiện trong bảng).
+- Chế độ `-tty table` chỉ phân tích được **mạch tổ hợp**; mạch tuần tự (bộ đếm, máy trạng thái)
+  không kiểm được bằng headless, phải mở GUI Logisim để xác nhận bằng mắt.
 
 ## 2. LTspice (headless)
 
@@ -76,9 +94,12 @@ Bản ngspice trong máy: `D:\megatools\Qucs-S\bin\ngspice.exe` (ngspice 46).
 ## 4. Chạy lại toàn bộ
 
 ```powershell
-python tools\logisim_lab3.py    # .circ + logisim_table.txt
-python tools\spice_lab3.py      # .cir + spice_table_*.txt + spice_wave.png
-python tools\render_all.py      # logic_diagram.png, wave.png, state_diagram.png
+python tools\logisim_lab2.py    # .circ + logisim_table.txt (5 bài Lab 2)
+python tools\logisim_lab3.py    # .circ + logisim_table.txt (Lab 3)
+python tools\spice_lab2.py      # .cir + spice_table_*.txt + spice_wave.png (Lab 2)
+python tools\spice_lab3.py      # .cir + spice_table_*.txt + spice_wave.png (Lab 3)
+python tools\render_all.py      # wave.png cho 14 project
+python tools\verify_all.py -o REPORT_EVIDENCE.md   # kiểm tra toàn bộ
 ```
 
 Kết quả SPICE được tự đối chiếu với bảng chân lý chuẩn và ghi `RESULT: PASS/FAIL`

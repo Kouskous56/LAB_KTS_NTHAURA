@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="5.0.0" version="1.0">
+This file is intended to be loaded by Logisim-evolution v5.0.0(https://github.com/logisim-evolution/)
+<lib desc="#Wiring" name="0"/>
+<lib desc="#Gates" name="1"/>
+<main name="main"/>
+<options>
+  <option name="gateUndefined" value="ignore"/>
+  <option name="simlimit" value="1000"/>
+  <option name="simrand" value="0"/>
+</options>
+<circuit name="main">
+  <a name="appearance" val="logisim_evolution"/>
+  <a name="circuit" val="main"/>
+    <comp lib="0" loc="(100,80)" name="Pin">
+      <a name="facing" val="east"/>
+      <a name="label" val="x"/>
+    </comp>
+    <comp lib="0" loc="(140,80)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="x"/>
+    </comp>
+    <comp lib="0" loc="(100,120)" name="Pin">
+      <a name="facing" val="east"/>
+      <a name="label" val="y"/>
+    </comp>
+    <comp lib="0" loc="(140,120)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="y"/>
+    </comp>
+    <comp lib="0" loc="(100,160)" name="Pin">
+      <a name="facing" val="east"/>
+      <a name="label" val="z"/>
+    </comp>
+    <comp lib="0" loc="(140,160)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="z"/>
+    </comp>
+    <comp lib="1" loc="(250,100)" name="NOT Gate">
+    </comp>
+    <comp lib="0" loc="(220,100)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="y"/>
+    </comp>
+    <comp lib="0" loc="(290,100)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="ny"/>
+    </comp>
+    <comp lib="1" loc="(450,200)" name="AND Gate">
+      <a name="size" val="50"/>
+      <a name="inputs" val="2"/>
+    </comp>
+    <comp lib="0" loc="(400,180)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="y"/>
+    </comp>
+    <comp lib="0" loc="(400,220)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="z"/>
+    </comp>
+    <comp lib="0" loc="(490,200)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="yz"/>
+    </comp>
+    <comp lib="1" loc="(650,140)" name="NOR Gate">
+      <a name="size" val="50"/>
+      <a name="inputs" val="2"/>
+    </comp>
+    <comp lib="0" loc="(590,120)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="x"/>
+    </comp>
+    <comp lib="0" loc="(590,160)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="yz"/>
+    </comp>
+    <comp lib="0" loc="(690,140)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="1" loc="(650,320)" name="NAND Gate">
+      <a name="size" val="50"/>
+      <a name="inputs" val="2"/>
+    </comp>
+    <comp lib="0" loc="(590,300)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="ny"/>
+    </comp>
+    <comp lib="0" loc="(590,340)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="x"/>
+    </comp>
+    <comp lib="0" loc="(690,320)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="1" loc="(850,230)" name="NOR Gate">
+      <a name="size" val="50"/>
+      <a name="inputs" val="2"/>
+    </comp>
+    <comp lib="0" loc="(790,210)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(790,250)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp lib="0" loc="(890,230)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="F"/>
+    </comp>
+    <comp lib="1" loc="(850,400)" name="AND Gate">
+      <a name="size" val="50"/>
+      <a name="inputs" val="2"/>
+    </comp>
+    <comp lib="0" loc="(800,380)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="x"/>
+    </comp>
+    <comp lib="0" loc="(800,420)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="ny"/>
+    </comp>
+    <comp lib="0" loc="(890,400)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="Fs"/>
+    </comp>
+    <comp lib="0" loc="(950,230)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="F"/>
+    </comp>
+    <comp lib="0" loc="(990,230)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="label" val="F"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(890,400)" name="Probe">
+    </comp>
+    <wire from="(100,80)" to="(140,80)"/>
+    <wire from="(100,120)" to="(140,120)"/>
+    <wire from="(100,160)" to="(140,160)"/>
+    <wire from="(250,100)" to="(290,100)"/>
+    <wire from="(450,200)" to="(490,200)"/>
+    <wire from="(650,140)" to="(690,140)"/>
+    <wire from="(650,320)" to="(690,320)"/>
+    <wire from="(850,230)" to="(890,230)"/>
+    <wire from="(850,400)" to="(890,400)"/>
+    <wire from="(950,230)" to="(990,230)"/>
+</circuit>
+</project>

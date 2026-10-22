@@ -1,0 +1,11 @@
+SPICE simulation (ngspice), EXP_2_1 - f = x'yz + (xy)'z + xy
+V(x) V(y) V(z) V(f)
+0 0 0 0
+0 0 1 1
+0 1 0 0
+0 1 1 1
+1 0 0 0
+1 0 1 1
+1 1 0 1
+1 1 1 1
+RESULT: PASS

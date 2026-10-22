@@ -1,0 +1,13 @@
+* EXP_2_1 - f = x'yz + (xy)'z + xy
+* gate level behavioural model, runs in LTspice and ngspice
+V_X x 0 PWL(0n 0 399n 0 400n 5 799n 5 800n 0)
+V_Y y 0 PWL(0n 0 199n 0 200n 5 399n 5 400n 0 599n 0 600n 5 799n 5 800n 0)
+V_Z z 0 PWL(0n 0 99n 0 100n 5 199n 5 200n 0 299n 0 300n 5 399n 5 400n 0 499n 0 500n 5 599n 5 600n 0 699n 0 700n 5 799n 5 800n 0)
+B_NX  nx  0 V = (V(x) > 2.5) ? 0 : 5
+B_XY  xy  0 V = V(x)*V(y) > 12.5 ? 5 : 0
+B_NXY nxy 0 V = (V(xy) > 2.5) ? 0 : 5
+B_T1  t1  0 V = V(nx)+V(y)+V(z) > 12.5 ? 5 : 0
+B_T2  t2  0 V = V(nxy)*V(z) > 12.5 ? 5 : 0
+B_F   f   0 V = V(t1)+V(t2)+V(xy) > 2.5 ? 5 : 0
+.tran 2n 800n
+.end

@@ -1,0 +1,11 @@
+SPICE simulation (ngspice), EXP_2_3 - F = NOR(NOR(x,yz), NAND(~y,x))
+V(x) V(y) V(z) V(F) V(Fs)
+0 0 0 0 0
+0 0 1 0 0
+0 1 0 0 0
+0 1 1 0 0
+1 0 0 1 1
+1 0 1 1 1
+1 1 0 0 0
+1 1 1 0 0
+RESULT: PASS

@@ -76,7 +76,8 @@ class Circ:
         name = {"AND": "AND Gate", "OR": "OR Gate", "XOR": "XOR Gate",
                 "NAND": "NAND Gate", "NOR": "NOR Gate", "NOT": "NOT Gate"}[kind]
         out = '    <comp lib="1" loc="(%d,%d)" name="%s">\n' % (x, y, name)
-        out += '      <a name="size" val="%d"/>\n' % size
+        if kind != "NOT":                    # the NOT gate has no size attribute
+            out += '      <a name="size" val="%d"/>\n' % size
         if kind != "NOT":
             out += '      <a name="inputs" val="%d"/>\n' % inputs
         if negate_out:
@@ -85,6 +86,40 @@ class Circ:
             out += '      <a name="label" val="%s"/>\n' % label
         out += "    </comp>\n"
         self.comps.append(out)
+
+    # ---- nets made with tunnels --------------------------------------
+    def input_net(self, x, y, label):
+        """Input pin wired to a tunnel of the same name."""
+        self.pin(x, y, label)
+        self.wire(x, y, x + 40, y)
+        self.tunnel(x + 40, y, label, "west")
+
+    def output_net(self, x, y, label):
+        """Tunnel of the given name wired to an output pin."""
+        self.wire(x, y, x + 40, y)
+        self.tunnel(x, y, label, "east")
+        self.pin(x + 40, y, label, output=True, facing="west")
+
+    def probe(self, x, y):
+        """Probe on a net: shows its value in the schematic but does not
+        appear in the truth table (only output pins do)."""
+        out = '    <comp lib="0" loc="(%d,%d)" name="Probe">\n' % (x, y)
+        out += "    </comp>\n"
+        self.comps.append(out)
+
+    def gate_net(self, x, y, kind, ins, out, size=50, inputs=None):
+        """Place a gate and connect its inputs/outputs with tunnels.
+
+        ins: list of net names (empty string = left open), out: output net.
+        """
+        n = inputs if inputs is not None else len(ins)
+        self.gate(x, y, kind, size=size, inputs=n)
+        for (px, py), net in zip(self.gate_inputs(x, y, kind, size, n), ins):
+            if net:
+                self.tunnel(px, py, net, "east")
+        if out:
+            self.wire(x, y, x + 40, y)
+            self.tunnel(x + 40, y, out, "west")
 
     def text(self, x, y, s, size=12):
         out = '    <comp lib="0" loc="(%d,%d)" name="Text">\n' % (x, y)
@@ -97,22 +132,45 @@ class Circ:
 
     # Logisim gate geometry (measured with Logisim 5.0.0):
     #   input pins are at (x - size, y +/- off), off = 10 for size 30, 20 for 50/70
-    #   the XOR gate is 10 px wider (extra curve), so its inputs are at x - size - 10
+    #   XOR has an extra curve (10 px) and NAND/NOR an output bubble (10 px),
+    #   so their inputs are 10 px further to the left
     @staticmethod
     def gate_dx(kind, size):
-        return size + (10 if kind in ("XOR", "XNOR") else 0)
+        if kind == "NOT":
+            return 30                      # the NOT gate is always 30 px wide
+        return size + (10 if kind in ("XOR", "XNOR", "NAND", "NOR") else 0)
 
     @staticmethod
     def gate_offset(size):
         return 10 if size == 30 else 20
 
     def gate_inputs(self, x, y, kind, size=50, inputs=2):
+        """Input port positions of a gate, following the Logisim algorithm."""
         dx = self.gate_dx(kind, size)
-        off = self.gate_offset(size)
-        if inputs == 1:
-            return [(x - dx, y)]
-        step = 2 * off / (inputs - 1)
-        return [(x - dx, y - off + i * step) for i in range(inputs)]
+        if inputs <= 3:
+            if size < 40:
+                skip_start, skip_dist, skip_lower = -5, 10, 10
+            elif size < 60 or inputs <= 2:
+                skip_start, skip_dist, skip_lower = -10, 20, 20
+            else:
+                skip_start, skip_dist, skip_lower = -15, 30, 30
+        elif inputs == 4 and size >= 60:
+            skip_start, skip_dist, skip_lower = -5, 20, 0
+        else:
+            skip_start, skip_dist, skip_lower = -5, 10, 10
+
+        offs = []
+        for index in range(inputs):
+            if inputs % 2 == 1:
+                dy = skip_start * (inputs - 1) + skip_dist * index
+            else:
+                dy = skip_start * inputs + skip_dist * index
+                if index >= inputs // 2:
+                    dy += skip_lower
+                if inputs == 4 and size >= 60:
+                    dy -= 10
+            offs.append((x - dx, y + dy))
+        return offs
 
     # ---- wires ------------------------------------------------------
     def wire(self, x1, y1, x2, y2):

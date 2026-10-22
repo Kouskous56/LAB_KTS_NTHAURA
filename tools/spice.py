@@ -14,6 +14,7 @@ The results are converted to a VCD so that tools/vcd2png.py can draw the
 waveform with the GTKWave look used in the report.
 """
 import subprocess
+import sys
 from pathlib import Path
 
 LTSPICE = r"C:\Users\ACER\AppData\Local\Programs\ADI\LTspice\LTspice.exe"
@@ -153,3 +154,58 @@ def logic_at(series, raw, t_ns, times_ns, threshold=2.5):
         else:
             break
     return val
+
+
+# ---------------------------------------------------------------- one circuit
+ROOT = Path(__file__).resolve().parent.parent
+
+
+def sample_table(times_ns, series, inputs, outputs, windows):
+    """Sample the circuit in the middle of every 100 ns window."""
+    rows = []
+    for k in range(windows):
+        t = 50 + 100 * k
+        row = [logic_at(series, raw, t, times_ns) for raw in inputs]
+        row += [logic_at(series, raw, t, times_ns) for raw in outputs]
+        rows.append(row)
+    return rows
+
+
+def render_wave(vcd_path, png_path, signals, title, cursor_ns=250.0):
+    """Draw the waveform with the GTKWave look of tools/vcd2png.py."""
+    cmd = [sys.executable, str(ROOT / "tools" / "vcd2png.py"), str(vcd_path),
+           "-o", str(png_path), "--signals", ",".join(signals), "--title", title,
+           "--cursor", str(cursor_ns)]
+    subprocess.run(cmd, check=True)
+
+
+def simulate(folder, net_name, deck, inputs, outputs, vcd_signals, title,
+             windows=8, expected=None):
+    """Write the netlist, simulate it with LTspice and ngspice, save results."""
+    folder = Path(folder)
+    (folder / net_name).write_text(deck, encoding="utf-8")
+    scratch = folder / "sim"          # raw and log files stay out of the repository
+    scratch.mkdir(exist_ok=True)
+
+    for sim, runner in (("LTspice", run_ltspice), ("ngspice", run_ngspice)):
+        deck_run = scratch / ("%s_%s" % (sim.lower(), net_name))
+        deck_run.write_text(deck, encoding="utf-8")
+        raw, log = runner(deck_run)
+        if raw is None:
+            print("!! %s failed in %s:\n%s" % (sim, folder.name, log[-800:]))
+            continue
+        names, times_ns, series = parse_raw(raw)
+        rows = sample_table(times_ns, series, inputs, outputs, windows)
+        head = " ".join(inputs + outputs)
+        text = "SPICE simulation (%s), %s\n%s\n" % (sim, title, head)
+        for r in rows:
+            text += " ".join(r) + "\n"
+        if expected is not None:
+            ok = all(r == e for r, e in zip(rows, expected))
+            text += "RESULT: %s\n" % ("PASS" if ok else "FAIL")
+        (folder / ("spice_table_%s.txt" % sim.lower())).write_text(text, encoding="utf-8")
+        if sim == "LTspice":
+            vcd = to_vcd(scratch / "spice_wave.vcd", times_ns, series, vcd_signals)
+            render_wave(vcd, folder / "spice_wave.png", [s for s, _ in vcd_signals], title)
+        print("--- %s [%s] ---" % (folder.name, sim))
+        print(text)

@@ -15,6 +15,11 @@ TOOL = ROOT / "tools" / "vcd2png.py"
 
 # folder -> (title, signals for the waveform)
 PROJECTS = {
+    "LAB_2/EXP_2_1": ("EXP_2_1 - f = x'yz + (xy)'z + xy", "x,y,z,f"),
+    "LAB_2/EXP_2_2": ("EXP_2_2 - F = sum m(0,1,3,4,7)", "X,Y,Z,F"),
+    "LAB_2/EXP_2_3": ("EXP_2_3 - F = NOR(NOR(x,yz), NAND(~y,x))", "x,y,z,F,Fs"),
+    "LAB_2/EXP_2_4": ("EXP_2_4 - 74LS151 multiplexer, f = sum m(1,2,4,7)", "x,y,z,f"),
+    "LAB_2/EXP_2_5": ("EXP_2_5 - 74LS138 decoder, f = sum m(0,2,5,7)", "x,y,z,f"),
     "PRELAB_3/EXP_3_1": ("EXP_3_1 - Full Adder (Table 3.1)", "A,B,Ci,S,Co"),
     "PRELAB_3/EXP_3_2": ("EXP_3_2 - 4-bit Adder/Subtractor (Table 3.4)", "Sel,A,B,S_ic,Cout_ic"),
     "PRELAB_3/EXP_3_3": ("EXP_3_3 - 0 to 7 up counter", "clk,clr,Q"),

@@ -1,0 +1,11 @@
+SPICE simulation (LTspice), EXP_2_4 - 74LS151: f = sum m(1,2,4,7)
+V(x) V(y) V(z) V(f) V(fb)
+0 0 0 0 1
+0 0 1 1 0
+0 1 0 1 0
+0 1 1 0 1
+1 0 0 1 0
+1 0 1 0 1
+1 1 0 0 1
+1 1 1 1 0
+RESULT: PASS
