@@ -128,15 +128,55 @@ def minterm_diagram(title, formula, keep, path):
 
 def exp_2_4(path):
     """74LS151: f = sum m(1,2,4,7)"""
-    minterm_diagram("EXP_2_4 - 74LS151 mux: f = sum m(1,2,4,7)",
-                    "I = 10010110 (I7..I0)   S = {x,y,z}   f = m1 + m2 + m4 + m7", [1, 2, 4, 7], path)
+    s = Sheet(11, 5.6, "EXP_2_4 - 74LS151 multiplexer: f = sum m(1,2,4,7)")
+    # dong du lieu I7..I0 = 10010110 va dong chon S = {x,y,z}
+    for k, name in enumerate(["x", "y", "z"]):
+        y = 44 - 8 * k
+        s.dot(6, y)
+        s.label(3, y, name, size=8, ha="right")
+    s.box(30, 14, 42, 34, "74LS151",
+          ["D0 = 0   D1 = 1", "D2 = 1   D3 = 0", "D4 = 1   D5 = 0",
+           "D6 = 0   D7 = 1", "nG = 0"], tsize=10)
+    s.pin(30, 44, "C")
+    s.pin(30, 36, "B")
+    s.pin(30, 28, "A")
+    s.pin(72, 28, "Y", side="left")
+    s.wire(6, 44, 30, 44)
+    s.wire(6, 36, 30, 36)
+    s.wire(6, 28, 30, 28)
+    s.wire(72, 28, 88, 28)
+    s.label(89, 28, "f", size=8, ha="left")
+    s.text(50, 5, "I = 10010110 (I7..I0)   S = {x,y,z}   Y = sum m(1,2,4,7)", size=9)
+    s.save(path)
 
 
 def exp_2_5(path):
     """74LS138: f = sum m(0,2,5,7)"""
-    minterm_diagram("EXP_2_5 - 74LS138 decoder: f = sum m(0,2,5,7)",
-                    "E1 = E2 = 0, E3 = 1, outputs active low   f = m0 + m2 + m5 + m7",
-                    [0, 2, 5, 7], path)
+    s = Sheet(11, 5.6, "EXP_2_5 - 74LS138 decoder: f = sum m(0,2,5,7)")
+    for k, name in enumerate(["x", "y", "z"]):
+        y = 46 - 8 * k
+        s.dot(6, y)
+        s.label(3, y, name, size=8, ha="right")
+    s.box(20, 16, 30, 32, "74LS138",
+          ["nEN2A = 0", "nEN2B = 0", "EN1 = 1", "Y0..Y7 muc thap"], tsize=10)
+    s.pin(20, 44, "C")
+    s.pin(20, 36, "B")
+    s.pin(20, 28, "A")
+    s.wire(6, 44, 20, 44)
+    s.wire(6, 36, 20, 36)
+    s.wire(6, 28, 20, 28)
+    # 74LS08 (2 AND) + 74LS00 (1 NAND) -> f = ~(Y0.Y2.Y5.Y7)
+    s.box(54, 20, 22, 24, "74LS08", ["Y0.Y2", "Y5.Y7"], tsize=9)
+    for name, y in (("Y0", 40), ("Y2", 34), ("Y5", 28), ("Y7", 22)):
+        s.pin(54, y, name)
+        s.wire(50, y, 54, y)
+    s.box(80, 22, 14, 18, "74LS00", ["f"], tsize=9)
+    s.wire(76, 38, 80, 38)
+    s.wire(76, 30, 80, 30)
+    s.wire(94, 31, 97, 31)
+    s.label(97, 31, "f", size=8, ha="left")
+    s.text(50, 1, "f = ~(Y0 . Y2 . Y5 . Y7) = sum m(0,2,5,7)", size=9)
+    s.save(path)
 
 
 JOBS = [
