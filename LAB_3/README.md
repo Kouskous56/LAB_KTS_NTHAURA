@@ -6,7 +6,10 @@ Chạy kiểm tra: `iverilog -g2012 -o tb.vvp *.sv` rồi `vvp tb.vvp`.
 | Exp | Nội dung | File chính | Kết quả tb |
 |---|---|---|---|
 | EXP_1 | Full Adder bằng cổng logic (Table 3.3) | `full_adder.sv` | ALL 8 TESTS PASS |
-| EXP_2 | 4-bit Adder/Subtractor dùng 74LS283 (Table 3.4) | `full_addsub_4bit.sv` | ALL TESTS PASS (24 lượt: 12 cặp × 2 mode) |
+
+> **Tài liệu tham chiếu IC**: xem [`IC_REFERENCE.md`](IC_REFERENCE.md) — pinout 74LS74/74LS283/74LS86/08/32,
+> bảng chức năng, và danh sách các chỗ manual sai/lệch đã kiểm chứng với datasheet TI.
+| EXP_2 | 4-bit Adder/Subtractor dùng 74LS283 (Table 3.4) | `full_addsub_4bit.sv` + `addsub_4bit_fa.sv` | ALL TESTS PASS (24 lượt: 12 cặp × 2 mode, kiểm song song cả 2 cách dựng) |
 | EXP_3 | D Flip-Flop 74LS74 (Table 3.5) | `dff74ls74.sv` | ALL TESTS PASS |
 | EXP_4 | Bộ đếm 0→7 dùng 74LS74 | `counter_0_7.sv` | ALL TESTS PASS |
 | EXP_5 | Mạch tuần tự Figure 3.6 | `fsm_fig34.sv` | ALL TESTS PASS |
@@ -46,6 +49,9 @@ Bảng chức năng:
 | 1 | 1 | 1 | ↑ | 1 | 0 |
 
 Nguyên tắc: đầu ra chỉ đổi khi có **cạnh lên** clock; tạo cạnh lên bằng cách gạt switch từ 0 sang 1.
+
+Pin 74LS74 (DIP-14): `1=1CLR, 2=1D, 3=1CLK, 4=1PRE, 5=1Q, 6=1Q', 7=GND, 8=2Q', 9=2Q, 10=2PRE, 11=2CLK, 12=2D, 13=2CLR, 14=VCC`.
+PRE/CLR tác động theo **mức**, không chỉ theo cạnh. Khi PRE=CLR=0 → Q=Q'=1 (nonstable).
 
 ## EXP_4 — Bộ đếm 0→7
 

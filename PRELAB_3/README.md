@@ -6,7 +6,7 @@ Mỗi bài có: module thiết kế + testbench (`iverilog` + `vvp`) + `top_modu
 | Bài | Nội dung | File chính | Kết quả tb |
 |---|---|---|---|
 | EXP_3_1 | Full Adder (Table 3.1) | `full_adder.sv` | ALL 8 TESTS PASS |
-| EXP_3_2 | 4-bit Adder/Subtractor dùng 74LS283 (Figure 3.1/3.2) | `full_addsub_4bit.sv`, `adder74ls283.sv` | ALL TESTS PASS |
+| EXP_3_2 | 4-bit Adder/Subtractor dùng 74LS283 (Figure 3.1/3.2) | `full_addsub_4bit.sv`, `adder74ls283.sv`, `addsub_4bit_fa.sv` | ALL TESTS PASS |
 | EXP_3_3 | Bộ đếm 0→7 dùng D-FF 74LS74 (Figure 3.3) | `counter_0_7.sv`, `dff74ls74.sv` | ALL TESTS PASS |
 | EXP_3_4 | Mạch tuần tự theo Figure 3.4 (Table 3.2) | `fsm_fig34.sv` | ALL TESTS PASS |
 
@@ -40,9 +40,16 @@ Cách hiện thực bằng IC thực tế:
 Cấu trúc ripple-carry (Figure 3.1): 4 khối full adder, carry-out khối thấp vào carry-in khối cao hơn.
 IC cần dùng: 74LS283 (adder 4 bit), 74LS86 (XOR đảo B khi trừ).
 
+Trong project này có **hai cách hiện thực** (tb kiểm tra song song, cùng 12 cặp Table 3.4 × 2 mode):
+- `full_addsub_4bit.sv` — dùng vi mạch 74LS283 (`adder74ls283.sv`).
+- `addsub_4bit_fa.sv` — dựng từ 4 khối Full Adder nối dây carry, đúng sơ đồ Figure 3.1 (ripple-carry thuần).
+
 **Lưu ý cần hỏi giảng viên**: manual ghi "ground C0" nhưng phép trừ bù hai cần `Cin = 1` ở chế độ trừ. Trong `full_addsub_4bit.sv` mình nối `Cin = Sel` (0 khi cộng, 1 khi trừ) — cần đối chiếu với wiring thực tế trước khi diễn giải số đo.
 
-Pin 74LS283 (Figure 3.2): `VCC 16, B3 15, A3 14, Σ3 13, A4 12, B4 11, Σ4 10, C4 9, Σ2 1, B2 2, A2 3, Σ1 4, A1 5, B1 6, C0 7, GND 8`.
+Ngoài ra: TI mô tả 74LS283 có **full internal look-ahead** qua cả 4 bit, chỉ *hiệu quả tương đương ripple* ở mức hệ thống — manual gọi nó là "ripple-carry adder" là không chính xác về mạch nội bộ. Hình Figure 3.1 (4 khối FA nối dây) mới thật sự là ripple thuần.
+
+Pin 74LS283 (Figure 3.2, đã đối chiếu datasheet TI): `VCC 16, B3 15, A3 14, Σ3 13, A4 12, B4 11, Σ4 10, C4 9, GND 8, C0 7, B1 6, A1 5, Σ1 4, A2 3, B2 2, Σ2 1`.
+Xem `LAB_3/IC_REFERENCE.md` cho toàn bộ pinout, bảng chức năng và các chỗ manual sai/lệch.
 
 ## EXP_3_3 — Bộ đếm 0→7 (74LS74)
 
@@ -82,6 +89,8 @@ S0+ = X · ~(S1 · S0)
 
 IC: 74LS74 (2 FF cho 2 trạng thái), 74LS08 (AND), 74LS32 (OR), 74LS86 (XOR nếu cần).
 Reset bằng CLR (active low) → về trạng thái A (00).
+
+Pin 74LS74 (DIP-14, đã đối chiếu datasheet TI): `1=1CLR, 2=1D, 3=1CLK, 4=1PRE, 5=1Q, 6=1Q', 7=GND, 8=2Q', 9=2Q, 10=2PRE, 11=2CLK, 12=2D, 13=2CLR, 14=VCC`.
 
 Chuỗi kiểm tra (Experiment 5): đầu vào `0 1 1 0 0 0 1` bắt đầu từ A cho chuỗi trạng thái
 `A → A → B → D → A → A → A → B`.
