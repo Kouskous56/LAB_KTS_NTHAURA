@@ -211,7 +211,8 @@ def main():
 
     # time ruler on top, GTKWave style
     span = t1 - t0
-    step = 0.5 if span <= 12 else (1 if span <= 40 else 5)
+    step = next((c for c in (0.5, 1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000)
+                 if span / c <= 14), span)
     t = t0
     while t <= t1 + 1e-9:
         ax.axvline(t, color=GRID, lw=0.7, zorder=0)

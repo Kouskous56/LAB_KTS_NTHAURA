@@ -1,0 +1,11 @@
+SPICE simulation (ngspice), Full adder - LTspice / ngspice transient analysis
+V(a) V(b) V(ci) V(s) V(co)
+0 0 0 0 0
+1 0 0 1 0
+0 1 0 1 0
+1 1 0 0 1
+0 0 1 1 0
+1 0 1 0 1
+0 1 1 0 1
+1 1 1 1 1
+RESULT: PASS

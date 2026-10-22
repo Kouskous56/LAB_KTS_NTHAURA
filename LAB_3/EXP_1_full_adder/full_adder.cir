@@ -1,0 +1,12 @@
+* Full adder - LTspice / ngspice transient analysis
+* gate level behavioural model, runs in LTspice and ngspice
+V_A  a  0 PWL(0 0 99n 0 101n 5 199n 5 201n 0 299n 0 301n 5 399n 5 401n 0 499n 0 501n 5 599n 5 601n 0 699n 0 701n 5 799n 5 801n 0)
+V_B  b  0 PWL(0 0 199n 0 201n 5 399n 5 401n 0 599n 0 601n 5 799n 5 801n 0)
+V_CI ci 0 PWL(0 0 399n 0 401n 5 799n 5 801n 0)
+B_T1 t1 0 V = V(a)+V(b) > 2.5 ? (V(a)+V(b) < 7.5 ? 5 : 0) : 0
+B_S  s  0 V = V(t1)+V(ci) > 2.5 ? (V(t1)+V(ci) < 7.5 ? 5 : 0) : 0
+B_C1 c1 0 V = V(a)*V(b) > 12.5 ? 5 : 0
+B_C2 c2 0 V = V(t1)*V(ci) > 12.5 ? 5 : 0
+B_CO co 0 V = V(c1)+V(c2) > 2.5 ? 5 : 0
+.tran 2n 800n
+.end

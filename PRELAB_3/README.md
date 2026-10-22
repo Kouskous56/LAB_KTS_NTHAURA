@@ -94,3 +94,33 @@ Pin 74LS74 (DIP-14, đã đối chiếu datasheet TI): `1=1CLR, 2=1D, 3=1CLK, 4=
 
 Chuỗi kiểm tra (Experiment 5): đầu vào `0 1 1 0 0 0 1` bắt đầu từ A cho chuỗi trạng thái
 `A → A → B → D → A → A → A → B`.
+
+## Minh chứng mô phỏng từ terminal
+
+Ngoài testbench `iverilog`, mỗi bài còn có minh chứng từ **Logisim Evolution** và
+**SPICE (LTspice + ngspice)**, tất cả đều chạy headless:
+
+| File | Nội dung |
+|---|---|
+| `*.circ` | sơ đồ mạch trong Logisim Evolution, mở trực tiếp được bằng Logisim |
+| `logisim_table.txt` | bảng chân lý do chính Logisim mô phỏng |
+| `*.cir` | netlist SPICE, mở được bằng cả LTspice lẫn ngspice |
+| `spice_table_ltspice.txt` | bảng chân lý lấy từ mô phỏng LTspice (có dòng `RESULT: PASS`) |
+| `spice_table_ngspice.txt` | bảng chân lý lấy từ mô phỏng ngspice (có dòng `RESULT: PASS`) |
+| `spice_wave.png` | dạng sóng mô phỏng, style GTKWave |
+| `logic_diagram.png`, `application_circuit.png`, `wave.png` | hình vẽ logic đồ, mạch ứng dụng, dạng sóng Icarus |
+
+Chạy lại toàn bộ:
+
+```powershell
+python tools\logisim_lab3.py
+python tools\spice_lab3.py
+python tools\render_all.py
+```
+
+Chi tiết cách dùng từng công cụ: `tools/README.md`.
+
+| Bài | Minh chứng thêm |
+|---|---|
+| EXP_3_1 | `EXP_3_1/full_adder.circ` + `logisim_table.txt` (Logisim, 8/8 đúng) |
+| EXP_3_2 | `EXP_3_2/adder4.cir` (bộ cộng 4 bit ripple, Figure 3.1), mô phỏng 16 tổ hợp, PASS |

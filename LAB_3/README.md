@@ -79,3 +79,33 @@ Kiểm tra theo sơ đồ: A -0-> A -1-> B -1-> D -0-> A -0-> A -0-> A -1-> B.
 
 Sơ đồ trạng thái giống hệt Figure 3.4, nên dùng chung module `fsm_fig34.sv` với
 `S1+ = X·S0·~S1`, `S0+ = X·~(S1·S0)`.
+
+## Minh chứng mô phỏng từ terminal
+
+Ngoài testbench `iverilog`, mỗi bài còn có minh chứng từ **Logisim Evolution** và
+**SPICE (LTspice + ngspice)**, tất cả đều chạy headless:
+
+| File | Nội dung |
+|---|---|
+| `*.circ` | sơ đồ mạch trong Logisim Evolution, mở trực tiếp được bằng Logisim |
+| `logisim_table.txt` | bảng chân lý do chính Logisim mô phỏng |
+| `*.cir` | netlist SPICE, mở được bằng cả LTspice lẫn ngspice |
+| `spice_table_ltspice.txt` | bảng chân lý lấy từ mô phỏng LTspice (có dòng `RESULT: PASS`) |
+| `spice_table_ngspice.txt` | bảng chân lý lấy từ mô phỏng ngspice (có dòng `RESULT: PASS`) |
+| `spice_wave.png` | dạng sóng mô phỏng, style GTKWave |
+| `logic_diagram.png`, `application_circuit.png`, `wave.png` | hình vẽ logic đồ, mạch ứng dụng, dạng sóng Icarus |
+
+Chạy lại toàn bộ:
+
+```powershell
+python tools\logisim_lab3.py
+python tools\spice_lab3.py
+python tools\render_all.py
+```
+
+Chi tiết cách dùng từng công cụ: `tools/README.md`.
+
+| Bài | Minh chứng thêm |
+|---|---|
+| EXP_1 | `EXP_1_full_adder/full_adder.circ` + `logisim_table.txt` (Logisim, 8/8 đúng) |
+| EXP_2 | `EXP_2_addsub_4bit/adder4.cir` (bộ cộng 4 bit ripple, Figure 3.1), mô phỏng 16 tổ hợp, PASS |
