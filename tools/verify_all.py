@@ -99,14 +99,21 @@ def run_tb(folder):
 
 
 def check_logisim(folder, expected):
-    """Compare the Logisim truth table with the table of the manual."""
+    """Compare the Logisim truth table with the table of the manual.
+
+    For the sequential circuits Logisim cannot build a truth table (they are not
+    combinational), so they are checked with the test vector mode instead.
+    """
     f = folder / "logisim_table.txt"
     if not f.exists():
         return None
-    rows = [ln.strip() for ln in f.read_text(encoding="utf-8").strip().splitlines()[1:]]
-    rows = [" ".join(r.split()) for r in rows]
+    text = f.read_text(encoding="utf-8")
     if expected is None:
-        return "có"
+        # sequential circuit: checked with test vectors
+        if "Error on test vector" in text:
+            return "SAI (test vector)"
+        return "PASS (vector)"
+    rows = [" ".join(ln.split()) for ln in text.strip().splitlines()[1:]]
     if len(rows) != len(expected):
         return "SAI (%d dòng, cần %d)" % (len(rows), len(expected))
     bad = sum(1 for a, b in zip(rows, expected) if a != b)
@@ -207,7 +214,7 @@ def main():
         if r["tb"] is False or logisim == "SAI" or r["spice"] == "FAIL":
             problems.append(r["path"])
     n_tb = sum(1 for r in results if r["tb"])
-    n_log = sum(1 for r in results if r["logisim"] in ("PASS", "có"))
+    n_log = sum(1 for r in results if r["logisim"] and r["logisim"].startswith("PASS"))
     n_sp = sum(1 for r in results if r["spice"] and "PASS" in r["spice"])
     n_bit = sum(1 for r in results if r["bit"])
     lines += ["", "- iverilog: **%d/%d** project PASS" % (n_tb, len(results)),

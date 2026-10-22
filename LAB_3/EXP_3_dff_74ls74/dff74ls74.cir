@@ -1,0 +1,28 @@
+* EXP_3 - D flip-flop 74LS74 (Table 3.5)
+* behavioural model, runs in LTspice and ngspice
+.model swl SW(Ron=1 Roff=1e12 Vt=2.5 Vh=0.1)
+.subckt dff d clk pre clr q qn
+* xung hep rong o canh day duong cua clock
+RCL  clk  clk_d 1
+CCL  clk_d 0 1n
+B_EDGE edge 0 V = ((V(clk) > 2.5) * (V(clk_d) <= 2.5)) ? 5 : 0
+* lay mau D trong xung hep, giu bang tu
+S1 qs d edge 0 swl
+C1 qs 0 5p IC=0
+R1 qs 0 1e12
+* preset / clear bat dong, muc thap, PRE uu tien khi ca hai cung tac dong
+B_PRESW presw 0 V = (5 - V(pre)) * V(clr) / 5
+B_CLRSW clrsw 0 V = (5 - V(clr)) * V(pre) / 5
+S2 qs v5 presw 0 swl
+S3 qs 0 clrsw 0 swl
+V5 v5 0 5
+B_Q  q  0 V = (V(pre) < 2.5) ? 5 : ((V(clr) < 2.5) ? 0 : V(qs))
+B_QN qn 0 V = ((V(pre) < 2.5) * (V(clr) < 2.5)) ? 5 : ((V(pre) < 2.5) ? 0 : ((V(clr) < 2.5) ? 5 : (V(qs) > 2.5 ? 0 : 5)))
+.ends dff
+V_PRE pre 0 PWL(0n 0 9n 0 10n 5 19n 5 20n 0 29n 0 30n 5 99n 5 100n 5)
+V_CLR clr 0 PWL(0n 0 9n 0 10n 0 19n 0 20n 5 29n 5 30n 5 99n 5 100n 5)
+V_D   d   0 PWL(0n 0 39n 0 40n 5 49n 5 50n 0 59n 0 60n 5 69n 5 70n 0 79n 0 80n 5 89n 5 90n 0 99n 0 100n 5 104n 5 105n 5)
+V_CLK clk 0 PWL(0n 0 49n 0 50n 5 69n 5 70n 0 89n 0 90n 5 99n 5 100n 0 104n 0 105n 5 119n 5 120n 5)
+X1 d clk pre clr q qn dff
+.tran 0.2n 130n
+.end

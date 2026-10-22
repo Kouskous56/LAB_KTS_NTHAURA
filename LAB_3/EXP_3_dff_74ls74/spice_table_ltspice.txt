@@ -1,0 +1,14 @@
+SPICE simulation (LTspice), EXP_3 - D flip-flop 74LS74 (Table 3.5)
+V(pre) V(clr) V(d) V(clk) V(q) V(qn)
+0 0 0 0 1 1
+1 0 0 0 0 1
+0 1 0 0 1 0
+1 1 0 0 1 0
+1 1 1 0 1 0
+1 1 0 1 0 1
+1 1 1 1 0 1
+1 1 0 0 0 1
+1 1 1 0 0 1
+1 1 0 1 0 1
+1 1 1 1 1 0
+RESULT: PASS

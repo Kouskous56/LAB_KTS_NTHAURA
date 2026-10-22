@@ -160,11 +160,15 @@ def logic_at(series, raw, t_ns, times_ns, threshold=2.5):
 ROOT = Path(__file__).resolve().parent.parent
 
 
-def sample_table(times_ns, series, inputs, outputs, windows):
-    """Sample the circuit in the middle of every 100 ns window."""
+def sample_table(times_ns, series, inputs, outputs, windows, sample_times=None):
+    """Sample the circuit in the middle of every 100 ns window, or at the given
+    times (used for the sequential circuits)."""
     rows = []
-    for k in range(windows):
-        t = 50 + 100 * k
+    if sample_times:
+        moments = sample_times
+    else:
+        moments = [50 + 100 * k for k in range(windows)]
+    for t in moments:
         row = [logic_at(series, raw, t, times_ns) for raw in inputs]
         row += [logic_at(series, raw, t, times_ns) for raw in outputs]
         rows.append(row)
@@ -180,7 +184,7 @@ def render_wave(vcd_path, png_path, signals, title, cursor_ns=250.0):
 
 
 def simulate(folder, net_name, deck, inputs, outputs, vcd_signals, title,
-             windows=8, expected=None):
+             windows=8, expected=None, sample_times=None):
     """Write the netlist, simulate it with LTspice and ngspice, save results."""
     folder = Path(folder)
     (folder / net_name).write_text(deck, encoding="utf-8")
@@ -195,7 +199,7 @@ def simulate(folder, net_name, deck, inputs, outputs, vcd_signals, title,
             print("!! %s failed in %s:\n%s" % (sim, folder.name, log[-800:]))
             continue
         names, times_ns, series = parse_raw(raw)
-        rows = sample_table(times_ns, series, inputs, outputs, windows)
+        rows = sample_table(times_ns, series, inputs, outputs, windows, sample_times)
         head = " ".join(inputs + outputs)
         text = "SPICE simulation (%s), %s\n%s\n" % (sim, title, head)
         for r in rows:

@@ -1,0 +1,11 @@
+SPICE simulation (ngspice), EXP_5 - state machine (Figure 3.4)
+V(x) V(q1) V(q0)
+0 0 0
+0 0 0
+1 0 1
+1 1 1
+0 0 0
+0 0 0
+0 0 0
+1 0 1
+RESULT: PASS

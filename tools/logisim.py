@@ -18,6 +18,8 @@ HEADER = """<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 This file is intended to be loaded by Logisim-evolution v5.0.0(https://github.com/logisim-evolution/)
 <lib desc="#Wiring" name="0"/>
 <lib desc="#Gates" name="1"/>
+<lib desc="#Memory" name="4"/>
+<lib desc="#TTL" name="A"/>
 <main name="main"/>
 <options>
   <option name="gateUndefined" value="ignore"/>
@@ -32,6 +34,37 @@ This file is intended to be loaded by Logisim-evolution v5.0.0(https://github.co
 FOOTER = """</circuit>
 </project>
 """
+
+# ---------------------------------------------------------------------------
+# Thu vien TTL cua Logisim (lib "A"). Vi tri cong lay tu ma nguon
+# AbstractTtlGate.updatePorts(): khop DIP 14/16 chan, huong EAST mac dinh.
+#   pin 1..N/2 o canh duoi (dy = +30), pin N/2+1..N o canh tren (dy = -30)
+#   dx = 20*i + 10 (nua duoi) hoac width - 20*(i - N/2) - 10 (nua tren)
+TTL_PINS = {
+    "7474": {  # 74LS74 - hai flip-flop D co preset/clear bat dong muc thap
+        0: (10, 30, "nCLR1", False), 1: (30, 30, "D1", False),
+        2: (50, 30, "CLK1", False), 3: (70, 30, "nPRE1", False),
+        4: (90, 30, "Q1", True), 5: (110, 30, "nQ1", True),
+        6: (130, -30, "nQ2", True), 7: (110, -30, "Q2", True),
+        8: (90, -30, "nPRE2", False), 9: (70, -30, "CLK2", False),
+        10: (50, -30, "D2", False), 11: (30, -30, "nCLR2", False),
+        12: (130, 30, "GND", False), 13: (10, -30, "VCC", False),
+    },
+    "7408": {  # 74LS08 - 4 cong AND 2 vao
+        0: (10, 30, "1A", False), 1: (30, 30, "1B", False), 2: (50, 30, "1Y", True),
+        3: (70, 30, "2A", False), 4: (90, 30, "2B", False), 5: (110, 30, "2Y", True),
+        6: (130, -30, "3Y", True), 7: (110, -30, "3A", False), 8: (90, -30, "3B", False),
+        9: (70, -30, "4Y", True), 10: (50, -30, "4A", False), 11: (30, -30, "4B", False),
+        12: (130, 30, "GND", False), 13: (10, -30, "VCC", False),
+    },
+    "7432": {  # 74LS32 - 4 cong OR 2 vao (cung chan 74LS08)
+        0: (10, 30, "1A", False), 1: (30, 30, "1B", False), 2: (50, 30, "1Y", True),
+        3: (70, 30, "2A", False), 4: (90, 30, "2B", False), 5: (110, 30, "2Y", True),
+        6: (130, -30, "3Y", True), 7: (110, -30, "3A", False), 8: (90, -30, "3B", False),
+        9: (70, -30, "4Y", True), 10: (50, -30, "4A", False), 11: (30, -30, "4B", False),
+        12: (130, 30, "GND", False), 13: (10, -30, "VCC", False),
+    },
+}
 
 
 def _overlap(a, b):
@@ -100,12 +133,73 @@ class Circ:
         self.tunnel(x, y, label, "east")
         self.pin(x + 40, y, label, output=True, facing="west")
 
+    def constant(self, x, y, value=1):
+        """Constant logic level (0 or 1)."""
+        out = '    <comp lib="0" loc="(%d,%d)" name="Constant">\n' % (x, y)
+        out += '      <a name="value" val="0x%x"/>\n' % (1 if value else 0)
+        out += "    </comp>\n"
+        self.comps.append(out)
+
+    def ttl(self, x, y, ic, nets, label=None):
+        """Place a real IC of the TTL library and connect the given nets.
+
+        ic:   key of TTL_PINS ("7474", "7408", "7432", ...)
+        nets: {port_index: net_name}
+        """
+        info = TTL_PINS[ic]
+        out = '    <comp lib="A" loc="(%d,%d)" name="%s">\n' % (x, y, ic)
+        if label:
+            out += '      <a name="label" val="%s"/>\n' % label
+        out += '      <a name="VccGndPorts" val="true"/>\n'
+        out += "    </comp>\n"
+        self.comps.append(out)
+        for port, net in nets.items():
+            dx, dy, _name, is_out = info[port]
+            px, py = x + dx, y + dy
+            # day ra duoi len, day vao len tren (theo hinh ve cua Logisim)
+            stub = 20 if dy > 0 else -20
+            self.wire(px, py, px, py + stub)
+            if net in ("0", "1"):
+                # hang so truc tiep: noi chan cua IC voi nguon hang
+                self.constant(px, py + stub, 1 if net == "1" else 0)
+            else:
+                self.tunnel(px, py + stub, net, "south" if stub > 0 else "north")
+
     def probe(self, x, y):
         """Probe on a net: shows its value in the schematic but does not
         appear in the truth table (only output pins do)."""
         out = '    <comp lib="0" loc="(%d,%d)" name="Probe">\n' % (x, y)
         out += "    </comp>\n"
         self.comps.append(out)
+
+    def dff(self, x, y, label=None, d="d", clk="clk", pre=None, clr=None,
+            q="q", qn=None):
+        """D flip-flop (Memory library, lib 4).
+
+        Port positions of Logisim 5 (evolution appearance), measured from the
+        source of AbstractFlipFlop:
+            D      (x - 10, y + 10)
+            CLK    (x - 10, y + 50)
+            Q      (x + 50, y + 10)
+            Q'     (x + 50, y + 50)
+            RESET  (x + 20, y + 60)   active low
+            PRESET (x + 20, y)        active low
+        """
+        out = '    <comp lib="4" loc="(%d,%d)" name="D Flip-Flop">\n' % (x, y)
+        if label:
+            out += '      <a name="label" val="%s"/>\n' % label
+        out += "    </comp>\n"
+        self.comps.append(out)
+        for net, (px, py) in ((d, (x - 10, y + 10)), (clk, (x - 10, y + 50))):
+            if net:
+                self.tunnel(px, py, net, "east")
+        for net, (px, py) in ((pre, (x + 20, y)), (clr, (x + 20, y + 60))):
+            if net:
+                self.tunnel(px, py, net, "west")
+        for net, (px, py) in ((q, (x + 50, y + 10)), (qn, (x + 50, y + 50))):
+            if net:
+                self.wire(px, py, px + 40, py)
+                self.tunnel(px + 40, py, net, "east")
 
     def gate_net(self, x, y, kind, ins, out, size=50, inputs=None):
         """Place a gate and connect its inputs/outputs with tunnels.

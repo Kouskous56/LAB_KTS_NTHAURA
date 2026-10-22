@@ -1,0 +1,6 @@
+Loading test vector �D:\LAB_KTS_NTHAURA\LAB_3\EXP_4_counter_0_7\logisim_vectors.txt��
+Running 2 vectors�
+1 
+2 
+
+Passed: 2, Failed: 0

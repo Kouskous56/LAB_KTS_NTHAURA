@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project source="5.0.0" version="1.0">
+This file is intended to be loaded by Logisim-evolution v5.0.0(https://github.com/logisim-evolution/)
+<lib desc="#Wiring" name="0"/>
+<lib desc="#Gates" name="1"/>
+<lib desc="#Memory" name="4"/>
+<lib desc="#TTL" name="A"/>
+<main name="main"/>
+<options>
+  <option name="gateUndefined" value="ignore"/>
+  <option name="simlimit" value="1000"/>
+  <option name="simrand" value="0"/>
+</options>
+<circuit name="main">
+  <a name="appearance" val="logisim_evolution"/>
+  <a name="circuit" val="main"/>
+    <comp lib="0" loc="(60,120)" name="Pin">
+      <a name="facing" val="east"/>
+      <a name="label" val="clk"/>
+    </comp>
+    <comp lib="0" loc="(100,120)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="clk"/>
+    </comp>
+    <comp lib="0" loc="(60,160)" name="Pin">
+      <a name="facing" val="east"/>
+      <a name="label" val="clr"/>
+    </comp>
+    <comp lib="0" loc="(100,160)" name="Tunnel">
+      <a name="facing" val="west"/>
+      <a name="label" val="clr"/>
+    </comp>
+    <comp lib="A" loc="(400,400)" name="7474">
+      <a name="label" val="U1"/>
+      <a name="VccGndPorts" val="true"/>
+    </comp>
+    <comp lib="0" loc="(410,450)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="clr"/>
+    </comp>
+    <comp lib="0" loc="(430,450)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="nQ0"/>
+    </comp>
+    <comp lib="0" loc="(450,450)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="clk"/>
+    </comp>
+    <comp lib="0" loc="(470,450)" name="Constant">
+      <a name="value" val="0x1"/>
+    </comp>
+    <comp lib="0" loc="(490,450)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="Q0"/>
+    </comp>
+    <comp lib="0" loc="(510,450)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="nQ0"/>
+    </comp>
+    <comp lib="0" loc="(530,450)" name="Constant">
+      <a name="value" val="0x0"/>
+    </comp>
+    <comp lib="0" loc="(410,350)" name="Constant">
+      <a name="value" val="0x1"/>
+    </comp>
+    <comp lib="A" loc="(700,400)" name="7474">
+      <a name="label" val="U2"/>
+      <a name="VccGndPorts" val="true"/>
+    </comp>
+    <comp lib="0" loc="(710,450)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="clr"/>
+    </comp>
+    <comp lib="0" loc="(730,450)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="nQ1"/>
+    </comp>
+    <comp lib="0" loc="(750,450)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="nQ0"/>
+    </comp>
+    <comp lib="0" loc="(770,450)" name="Constant">
+      <a name="value" val="0x1"/>
+    </comp>
+    <comp lib="0" loc="(790,450)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="Q1"/>
+    </comp>
+    <comp lib="0" loc="(810,450)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="nQ1"/>
+    </comp>
+    <comp lib="0" loc="(830,350)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="nQ2"/>
+    </comp>
+    <comp lib="0" loc="(810,350)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="Q2"/>
+    </comp>
+    <comp lib="0" loc="(790,350)" name="Constant">
+      <a name="value" val="0x1"/>
+    </comp>
+    <comp lib="0" loc="(770,350)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="nQ1"/>
+    </comp>
+    <comp lib="0" loc="(750,350)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="nQ2"/>
+    </comp>
+    <comp lib="0" loc="(730,350)" name="Tunnel">
+      <a name="facing" val="north"/>
+      <a name="label" val="clr"/>
+    </comp>
+    <comp lib="0" loc="(830,450)" name="Constant">
+      <a name="value" val="0x0"/>
+    </comp>
+    <comp lib="0" loc="(710,350)" name="Constant">
+      <a name="value" val="0x1"/>
+    </comp>
+    <comp lib="0" loc="(1000,120)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Q2"/>
+    </comp>
+    <comp lib="0" loc="(1040,120)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="label" val="Q2"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(1000,160)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Q1"/>
+    </comp>
+    <comp lib="0" loc="(1040,160)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="label" val="Q1"/>
+      <a name="output" val="true"/>
+    </comp>
+    <comp lib="0" loc="(1000,200)" name="Tunnel">
+      <a name="facing" val="east"/>
+      <a name="label" val="Q0"/>
+    </comp>
+    <comp lib="0" loc="(1040,200)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="label" val="Q0"/>
+      <a name="output" val="true"/>
+    </comp>
+    <wire from="(60,120)" to="(100,120)"/>
+    <wire from="(60,160)" to="(100,160)"/>
+    <wire from="(410,430)" to="(410,450)"/>
+    <wire from="(430,430)" to="(430,450)"/>
+    <wire from="(450,430)" to="(450,450)"/>
+    <wire from="(470,430)" to="(470,450)"/>
+    <wire from="(490,430)" to="(490,450)"/>
+    <wire from="(510,430)" to="(510,450)"/>
+    <wire from="(530,430)" to="(530,450)"/>
+    <wire from="(410,370)" to="(410,350)"/>
+    <wire from="(710,430)" to="(710,450)"/>
+    <wire from="(730,430)" to="(730,450)"/>
+    <wire from="(750,430)" to="(750,450)"/>
+    <wire from="(770,430)" to="(770,450)"/>
+    <wire from="(790,430)" to="(790,450)"/>
+    <wire from="(810,430)" to="(810,450)"/>
+    <wire from="(830,370)" to="(830,350)"/>
+    <wire from="(810,370)" to="(810,350)"/>
+    <wire from="(790,370)" to="(790,350)"/>
+    <wire from="(770,370)" to="(770,350)"/>
+    <wire from="(750,370)" to="(750,350)"/>
+    <wire from="(730,370)" to="(730,350)"/>
+    <wire from="(830,430)" to="(830,450)"/>
+    <wire from="(710,370)" to="(710,350)"/>
+    <wire from="(1000,120)" to="(1040,120)"/>
+    <wire from="(1000,160)" to="(1040,160)"/>
+    <wire from="(1000,200)" to="(1040,200)"/>
+</circuit>
+</project>
