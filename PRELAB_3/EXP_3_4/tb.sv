@@ -5,8 +5,9 @@ module tb;
     fsm_fig34 u (.clk(clk), .clr(clr), .X(X), .S(S));
 
     int bad = 0;
+    logic [1:0] cur, nxt;
 
-    // Figure 3.4 / Table 3.2: next state
+    // Figure 3.4 next state
     function automatic logic [1:0] next_state(input logic [1:0] ps, input logic x);
         case ({ps, x})
             {2'b00, 1'b0}: return 2'b00;  // A -> A
@@ -33,32 +34,28 @@ module tb;
         end
     endtask
 
-    logic [1:0] cur, nxt;
-
     initial begin
         $dumpfile("wave.vcd");
         $dumpvars(0, tb);
         $display("start test");
-
         reset_a;
         if (S !== 2'b00) begin bad++; $display("FAIL reset S=%b", S); end
         else $display("reset -> A (00) OK");
 
-        // walk the state table: A -> B -> D -> C, check every transition on the way
-        cur = 2'b00; nxt = 2'b00;
+        // walk every state and every input of the state table
         for (int i = 0; i < 8; i++) begin
             for (int x = 0; x < 2; x++) begin
-                // drive to state 'cur' using known path from A
                 reset_a;
-                case (cur)
-                    2'b00: begin end                       // A
-                    2'b01: begin tick(1'b1); end           // A -X=1-> B
-                    2'b11: begin tick(1'b1); tick(1'b1); end // A->B->D
-                    2'b10: begin tick(1'b1); tick(1'b1); tick(1'b1); end // A->B->D->C
+                case (i[1:0])
+                    2'b00: ;                              // A
+                    2'b01: tick(1'b1);                    // A -> B
+                    2'b11: begin tick(1'b1); tick(1'b1); end // A -> B -> D
+                    2'b10: begin tick(1'b1); tick(1'b1); tick(1'b1); end // -> C
                 endcase
+                cur = i[1:0];
                 if (S !== cur) begin
                     bad++;
-                    $display("FAIL reach state %b, got %b", cur, S);
+                    $display("FAIL reach %b, got %b", cur, S);
                 end
                 nxt = next_state(cur, x[0]);
                 tick(x[0]);
@@ -70,7 +67,7 @@ module tb;
             end
         end
 
-        // input sequence 0,1,1,0,0,0,1 starting from state A
+        // input sequence 0 1 1 0 0 0 1 from state A
         reset_a;
         $display("--- sequence 0 1 1 0 0 0 1 ---");
         $display("state before input 0 = %b (A)", S);

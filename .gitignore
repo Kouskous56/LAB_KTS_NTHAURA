@@ -19,3 +19,7 @@ compile.log
 # --- OS junk ---
 Thumbs.db
 desktop.ini
+
+# --- python cache ---
+__pycache__/
+*.pyc

@@ -1,7 +1,7 @@
 `timescale 1ns/1ps
-// EXP_3_2: 4-bit full adder / subtractor using 74LS283
-// Sel=0: S = A + B        (Cin=0, B passed)
-// Sel=1: S = A - B        (Cin=1, B inverted -> A + ~B + 1)
+// 4-bit adder/subtractor with 74LS283
+//   Sel=0: S = A + B
+//   Sel=1: S = A - B   (A + ~B + 1, XOR 4 bits of B with Sel, Cin = Sel)
 module full_addsub_4bit (
     input  logic       Sel,
     input  logic [3:0] A, B,

@@ -18,24 +18,24 @@ module tb;
         $dumpvars(0, tb);
         $display("start test");
 
-        // A=0, B=1 : LSB frozen -> count does not advance
+        // A=0, B=1 : LSB frozen, count does not advance
         A = 1'b0; B = 1'b1;
         clr = 1'b0; #1; clr = 1'b1; #1;
         for (int i = 0; i < 4; i++) tick();
         if (Q !== 3'b000) begin bad++; $display("FAIL A=0,B=1 Q=%b", Q); end
         else $display("A=0,B=1 -> Q=%b (frozen) OK", Q);
 
-        // A=1, B=0 : only LSB toggles
+        // A=1, B=0 : only the LSB toggles
         A = 1'b1; B = 1'b0;
         clr = 1'b0; #1; clr = 1'b1; #1;
         tick();
-        if (Q !== 3'b001) begin bad++; $display("FAIL A=1,B=0 step1 Q=%b", Q); end
+        if (Q !== 3'b001) begin bad++; $display("FAIL A=1,B=0 Q=%b", Q); end
         else $display("A=1,B=0 -> Q=%b OK", Q);
         tick();
-        if (Q !== 3'b000) begin bad++; $display("FAIL A=1,B=0 step2 Q=%b", Q); end
+        if (Q !== 3'b000) begin bad++; $display("FAIL A=1,B=0 Q=%b", Q); end
         else $display("A=1,B=0 -> Q=%b OK", Q);
 
-        // A=B=1 : full 0..7 then wrap
+        // A=B=1 : full 0..7 counting
         A = 1'b1; B = 1'b1;
         clr = 1'b0; #1; clr = 1'b1; #1;
         for (int i = 1; i <= 8; i++) begin

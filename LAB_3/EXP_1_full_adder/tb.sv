@@ -7,25 +7,18 @@ module tb;
     int bad = 0;
     logic [1:0] exp;
 
-    // truth table Table 3.1: A B Ci -> S Co
-    function automatic logic [1:0] expected(input logic a, b, c);
-        logic s  = a ^ b ^ c;
-        logic co = (a & b) | (a & c) | (b & c);
-        return {co, s};
-    endfunction
-
     initial begin
         $dumpfile("wave.vcd");
         $dumpvars(0, tb);
         $display("start test");
+        // all 8 input combinations, check against Table 3.1
         for (int v = 0; v < 8; v++) begin
             A = v[2]; B = v[1]; Ci = v[0];
-            exp = expected(A, B, Ci);
+            exp = {A & B | A & Ci | B & Ci, A ^ B ^ Ci};
             #1;
             if ({Co, S} !== exp) bad++;
-            $display("A=%b B=%b Ci=%b | S=%b Co=%b (exp S=%b Co=%b) %s",
-                     A, B, Ci, S, Co, exp[0], exp[1],
-                     ({Co,S} === exp) ? "OK" : "FAIL");
+            $display("A=%b B=%b Ci=%b S=%b Co=%b %s", A, B, Ci, S, Co,
+                     ({Co, S} === exp) ? "OK" : "FAIL");
         end
         if (bad == 0) $display("ALL 8 TESTS PASS");
         else $display("%0d FAILURES", bad);

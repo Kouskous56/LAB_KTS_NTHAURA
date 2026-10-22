@@ -1,6 +1,8 @@
 `timescale 1ns/1ps
+// Nexys A7: SW[3:0]=A, SW[7:4]=B, SW[8]=Sel
+//            LED[3:0]=S, LED[15]=Cout
 module top_module (
-    input  logic [8:0] SW,    // SW[3:0]=A, SW[7:4]=B, SW[8]=Sel
+    input  logic [8:0] SW,
     output logic [15:0] LED
 );
     logic [3:0] S;
