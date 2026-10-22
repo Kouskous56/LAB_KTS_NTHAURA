@@ -140,6 +140,7 @@ def check_project(folder):
     imgs = [a for a in ARTIFACTS if (folder / a).exists()]
     return {
         "path": rel,
+        "folder": folder,
         "name": NAMES.get(rel, rel),
         "tb": tb_ok,
         "tb_msg": tb_msg,
@@ -236,7 +237,7 @@ def main():
                 files.append("Logisim: " + ", ".join("`%s`" % f for f in r["circ"]))
             if r["logisim"]:
                 files.append("`logisim_table.txt`")
-            if (folder / "logisim_vectors.txt").exists():
+            if (r["folder"] / "logisim_vectors.txt").exists():
                 files.append("`logisim_vectors.txt`")
             if r["cir"]:
                 files.append("SPICE: " + ", ".join("`%s`" % f for f in r["cir"]))
