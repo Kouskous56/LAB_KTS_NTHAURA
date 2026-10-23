@@ -41,6 +41,9 @@ vvp tb.vvp
 | 7432 | Quad 2-input OR | `ic_7432` |
 | 7486 | Quad 2-input XOR | `ic_7486` |
 | 74266 | Quad 2-input XNOR | `ic_74266` |
+| 7411 | Triple 3-input AND | `ic_7411` |
+| 7421 | Dual 4-input AND | `ic_7421` |
+| 7427 | Triple 3-input NOR | `ic_7427` |
 
 ### 2. Tổ hợp (`combinational/`)
 
@@ -58,6 +61,9 @@ vvp tb.vvp
 | 74283 | 4-bit full adder (fast carry) | `ic_74283` |
 | 7447 | BCD to 7-segment (common anode) | `ic_7447` |
 | 7483 | 4-bit full adder | `ic_7483` |
+| 7485 | 4-bit magnitude comparator | `ic_7485` |
+| 74238 | 3-to-8 decoder (active-high outputs) | `ic_74238` |
+| 74183 | Dual full adder | `ic_74183` |
 
 ### 3. Tuần tự (`sequential/`)
 
@@ -74,6 +80,12 @@ vvp tb.vvp
 | 74194 | 4-bit bidirectional shift register | `ic_74194` |
 | 74373 | Octal D latch (OE active low) | `ic_74373` |
 | 74374 | Octal D flip-flop (OE active low, pos edge) | `ic_74374` |
+| 7493 | 4-bit binary ripple counter | `ic_7493` |
+| 74107 | Dual JK flip-flop (clear, neg edge) | `ic_74107` |
+| 74174 | Hex D flip-flop | `ic_74174` |
+| 74273 | Octal D flip-flop (clear) | `ic_74273` |
+| 74377 | Octal D register (clock enable) | `ic_74377` |
+| 74595 | 8-bit shift register (output latch) | `ic_74595` |
 
 ### 4. Nhớ (`memory/`)
 
@@ -93,7 +105,7 @@ vvp tb.vvp
 
 ## Tổng số
 
-- **40 IC** (11 cổng + 12 tổ hợp + 11 tuần tự + 2 nhớ + 4 hỗ trợ)
+- **52 IC** (14 cổng + 14 tổ hợp + 18 tuần tự + 2 nhớ + 4 hỗ trợ)
 - Mỗi IC có testbench tự kiểm tra in `ALL TESTS PASS`.
 - Tất cả biên dịch được với `iverilog -g2012`.
 
