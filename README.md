@@ -6,8 +6,10 @@ Bài lab môn Kỹ thuật số (KTS) — thiết kế mạch tổ hợp và m�
 | Thư mục | Nội dung | Số bài |
 |---|---|---|
 | [`LAB_2/`](LAB_2/README.md) | Boolean algebra và mạch tổ hợp | 5 |
-| [`LAB_3/`](LAB_3/README.md) | Mạch tổ hợp và mạch tuần tự | 5 |
 | [`PRELAB_3/`](PRELAB_3/README.md) | Bài 3 phần chuẩn bị | 4 |
+| [`LAB_3/`](LAB_3/README.md) | Mạch tổ hợp và mạch tuần tự | 5 |
+| [`PRELAB_4/`](PRELAB_4/README.md) | Bài 4 phần chuẩn bị (FPGA) | 5 |
+| [`LAB_4/`](LAB_4/README.md) | Mạch tổ hợp và tuần tự trên FPGA | 6 |
 | [`REPORT_EVIDENCE.md`](REPORT_EVIDENCE.md) | Bảng tổng hợp minh chứng của 14 bài | — |
 | [`LAB_3/IC_REFERENCE.md`](LAB_3/IC_REFERENCE.md) | Chức năng và pinout IC (74LS74, 74LS283, 74LS86, 74LS08, 74LS32, 74LS151, 74LS138) | — |
 
@@ -15,10 +17,10 @@ Bài lab môn Kỹ thuật số (KTS) — thiết kế mạch tổ hợp và m�
 
 | Công cụ | Kết quả |
 |---|---|
-| iverilog (testbench) | **14/14** project PASS |
-| Logisim Evolution 5.0.0 | **14/14** project khớp bảng chân lý manual |
-| SPICE (LTspice 26.1.1 + ngspice 46) | **14/14** project PASS ở cả hai simulator |
-| Vivado bitstream | 5/5 file `.bit` của `LAB_2` (chương 3 không build `.bit`) |
+| iverilog (testbench) | **25/25** project PASS (LAB_2 5, PRELAB_3 4, LAB_3 5, PRELAB_4 5, LAB_4 6) |
+| Logisim Evolution 5.0.0 | **14/14** project khớp (chỉ các bài chương 2-3 có sơ đồ Logisim) |
+| SPICE (LTspice 26.1.1 + ngspice 46) | **14/14** project PASS (chỉ các bài chương 2-3 có netlist SPICE) |
+| Vivado bitstream | 5/5 file `.bit` của `LAB_2`; chương 3-4 chưa build `.bit` (người dùng tự build) |
 
 Chi tiết từng bài: [`REPORT_EVIDENCE.md`](REPORT_EVIDENCE.md).
 

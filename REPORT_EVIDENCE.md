@@ -38,11 +38,22 @@ bo Nexys A7.
 | PRELAB_3 EXP_3_2 - 4-bit Adder/Subtractor (Table 3.4) | PASS | PASS | PASS/PASS | không build |
 | PRELAB_3 EXP_3_3 - Bộ đếm 0 đến 7 | PASS | PASS (vector) | PASS/PASS | không build |
 | PRELAB_3 EXP_3_4 - Máy trạng thái (Figure 3.4) | PASS | PASS (vector) | PASS/PASS | không build |
+| PRELAB_4 EXP_4_1 - Full Adder (Fig. 4.1) | PASS | - | - | không build |
+| PRELAB_4 EXP_4_2 - 4-bit Adder/Subtractor (2 phương pháp) | PASS | - | - | không build |
+| PRELAB_4 EXP_4_3 - BCD -> 7 đoạn anode chung (Table 4.1) | PASS | - | - | không build |
+| PRELAB_4 EXP_4_4 - Bộ chia clock 100 MHz -> 1 Hz | PASS | - | - | không build |
+| PRELAB_4 EXP_4_5 - FSM 4 trạng thái | PASS | - | - | không build |
+| LAB_4 EXP_1 - Giá trị tuyệt đối 4 bit | PASS | - | - | không build |
+| LAB_4 EXP_2 - ALU 4 bit | PASS | - | - | không build |
+| LAB_4 EXP_3 - Bộ đếm xuống 3 bit ra 7 đoạn | PASS | - | - | không build |
+| LAB_4 EXP_4 - Bộ đếm lên 5 -> 14 | PASS | - | - | không build |
+| LAB_4 EXP_5 - Mạch tuần tự (chia hết cho 3 & số 0 chẵn) | PASS | - | - | không build |
+| LAB_4 EXP_6 - Máy tự động bán hàng | PASS | - | - | không build |
 
-- iverilog: **14/14** project PASS
-- Logisim: **14/14** project khớp bảng chân lý manual
-- SPICE: **14/14** project PASS ở cả LTspice và ngspice
-- Bitstream: **5/14** project có file `.bit` (chỉ LAB_2, chương 3 không build `.bit`)
+- iverilog: **25/25** project PASS
+- Logisim: **14/14** project khớp bảng chân lý manual (chỉ các bài chương 2-3 có sơ đồ Logisim)
+- SPICE: **14/14** project PASS ở cả LTspice và ngspice (chỉ các bài chương 2-3 có netlist SPICE)
+- Bitstream: **5/25** project có file `.bit` (chỉ LAB_2; chương 3-4 người dùng tự build)
 
 ## Kết quả chi tiết theo bài
 
