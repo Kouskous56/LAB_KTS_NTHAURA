@@ -42,3 +42,14 @@ __pycache__/
 
 # --- SPICE scratch folders (raw, log, vcd sinh ra khi mo phong) ---
 **/sim/
+
+# --- Local only (not tracked) ---
+DEC_ENC/
+DIGITAL_SYSTEMS/
+FSM_LAB/
+IC_SV/
+MUX_DEMUX/
+SEQ_CIRCUITS/
+playground/
+REPORT_EVIDENCE.md
+SUBSTRATE.md

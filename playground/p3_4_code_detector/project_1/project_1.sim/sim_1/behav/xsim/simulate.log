@@ -1,5 +1,0 @@
-Time resolution is 1 ps
-start test
-ALL 32 TESTS PASS
-done
-$finish called at time : 32 ns : File "D:/LAB_KTS_NTHAURA/p3_4_code_detector/tb.sv" Line 30
