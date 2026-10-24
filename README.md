@@ -6,6 +6,7 @@ Bài lab môn Kỹ thuật số (KTS) — thiết kế mạch tổ hợp và m�
 | Thư mục | Nội dung | Số bài |
 |---|---|---|
   | [`PRELAB_1/`](PRELAB_1/README.md) | B?i 1 ph?n chu?n b? (breadboard, IC pinout) | 12 |
+| [`PRELAB_2/`](PRELAB_2/README.md) | B?i 2 ph?n chu?n b? (MUX, decoder, Boolean) | 3 |
   | [`LAB_1/`](LAB_1/README.md) | M?ch t? h?p tr?n breadboard (Boolean function) | 5 |
 | [`LAB_2/`](LAB_2/README.md) | Boolean algebra và mạch tổ hợp | 5 |
 | [`PRELAB_3/`](PRELAB_3/README.md) | Bài 3 phần chuẩn bị | 4 |
