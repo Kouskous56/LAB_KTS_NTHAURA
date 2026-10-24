@@ -1,18 +1,18 @@
-# EX_04 ? Sequence detector "101" (Mealy, overlapping)
+# EX_04 — Sequence detector "101" (Mealy, overlapping)
 
-## Kh?i ni?m
-FSM ph?t hi?n m?u "101" trong chu?i bit (Mealy output).
-- Mealy: output ph? thu?c state + input.
-- z=1 khi bit cu?i c?a "101" ???c nh?n.
-- Overlapping: sau khi ph?t hi?n, quay v? S1 (v? bit cu?i "1" c? th? l? b?t ??u m?i).
+## Khái niệm
+FSM phát hiện mẫu "101" trong chuỗi bit (Mealy output).
+- Mealy: output phụ thuộc state + input.
+- z=1 khi bit cuối của "101" được nhận.
+- Overlapping: sau khi phát hiện, quay về S1 (vì bit cuối "1" có thể là bắt đầu mới).
 
 ## State diagram
-- S0: tr?ng th?i ban ??u (ch?a match)
-- S1: ?? nh?n "1"
-- S2: ?? nh?n "10"
-- Nh?n "1" ? S2: output z=1, chuy?n S1 (overlap)
+- S0: trạng thái ban đầu (chưa match)
+- S1: đã nhận "1"
+- S2: đã nhận "10"
+- Nhận "1" ở S2: output z=1, chuyển S1 (overlap)
 
-## ?ng d?ng
+## Ứng dụng
 - Sequence detector.
 - Protocol parser.
 - Pattern matching.

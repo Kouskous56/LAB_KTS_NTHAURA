@@ -1,11 +1,11 @@
-# EX_09 ? Shift register (serial in, parallel out)
+# EX_09 — Shift register (serial in, parallel out)
 
-## Kh?i ni?m
-Shift Register (SIPO): d? li?u v?o n?i ti?p (serial in), ??c song song (parallel out).
-- M?i c?nh l?n clock: q = {q[6:0], si}.
-- MSB v?o tr??c, LSB v?o sau.
+## Khái niệm
+Shift Register (SIPO): dữ liệu vào nối tiếp (serial in), đọc song song (parallel out).
+- Mỗi cạnh lên clock: q = {q[6:0], si}.
+- MSB vào trước, LSB vào sau.
 
-## ?ng d?ng
+## Ứng dụng
 - IC 74LS164 (8-bit serial-in parallel-out shift register).
 - Serial-to-parallel conversion.
 - Data buffering.

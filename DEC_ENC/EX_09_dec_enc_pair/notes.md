@@ -1,12 +1,12 @@
-# EX_09 ? Decoder-Encoder pair (round trip)
+# EX_09 — Decoder-Encoder pair (round trip)
 
-## Kh?i ni?m
-K?t h?p decoder v? encoder ?? ki?m tra round trip:
-- Decoder: m? 3-bit ? one-hot 8-bit.
-- Encoder: one-hot 8-bit ? m? 3-bit.
-- K?t qu?: dout = din (round trip th?nh c?ng).
+## Khái niệm
+Kết hợp decoder và encoder để kiểm tra round trip:
+- Decoder: mã 3-bit → one-hot 8-bit.
+- Encoder: one-hot 8-bit → mã 3-bit.
+- Kết quả: dout = din (round trip thành công).
 
-## ?ng d?ng
-- Ki?m tra t?nh ??ng ??n c?a decoder/encoder.
+## Ứng dụng
+- Kiểm tra tính đúng đắn của decoder/encoder.
 - Address translation.
 - Code conversion.

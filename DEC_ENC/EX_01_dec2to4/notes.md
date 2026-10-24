@@ -1,8 +1,8 @@
-# EX_01 ? Decoder 2-to-4 (active high)
+# EX_01 — Decoder 2-to-4 (active high)
 
-## Kh?i ni?m
-Decoder 2-to-4 bi?n m? 2-bit (a[1:0]) th?nh m?t trong 4 ??u ra (y[0..3]).
-Ch? c? m?t ??u ra ? m?c 1 t?i m?t th?i ?i?m (one-hot).
+## Khái niệm
+Decoder 2-to-4 biến mã 2-bit (a[1:0]) thành một trong 4 đầu ra (y[0..3]).
+Chỉ có một đầu ra ở mức 1 tại một thời điểm (one-hot).
 
 ## Truth table
 
@@ -23,7 +23,7 @@ module dec2to4 (input logic [1:0] a, output logic [3:0] y);
 endmodule
 ```
 
-## ?ng d?ng
-- Gi?i m? ??a ch? (address decoding).
-- Ch?n m?t trong nhi?u thi?t b?.
-- X?y d?ng decoder l?n h?n (3-to-8, 4-to-16).
+## Ứng dụng
+- Giải mã địa chỉ (address decoding).
+- Chọn một trong nhiều thiết bị ngoại vi.
+- Xây dựng decoder lớn hơn (3-to-8, 4-to-16).

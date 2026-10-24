@@ -1,12 +1,12 @@
-# EX_08 ? Encoder as Boolean function generator
+# EX_08 — Encoder as Boolean function generator
 
-## Kh?i ni?m
-Encoder c? th? d?ng ?? tri?n khai h?m Boolean ho?c ch?n ?u ti?n.
-- Priority encoder ch?n input c? ?u ti?n cao nh?t.
-- Output l? m? nh? ph?n c?a input ???c ch?n.
-- C? th? d?ng ?? implement c?c h?m logic.
+## Khái niệm
+Encoder có thể dùng để triển khai hàm Boolean hoặc chọn ưu tiên.
+- Priority encoder chọn input có ưu tiên cao nhất.
+- Output là mã nhị phân của input được chọn.
+- Có thể dùng để implement các hàm logic.
 
-## ?ng d?ng
-- Interrupt controller (ch?n interrupt c? ?u ti?n cao nh?t).
+## Ứng dụng
+- Interrupt controller (chọn interrupt có ưu tiên cao nhất).
 - Keyboard encoder.
 - Address encoding.
