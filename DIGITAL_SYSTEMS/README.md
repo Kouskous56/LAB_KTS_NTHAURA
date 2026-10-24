@@ -20,6 +20,7 @@ kèm code SystemVerilog, testbench và ghi chú.
 | EX_10 | Digital Lock (password) | `digital_lock.sv` | ALL TESTS PASS |
 | EX_11 | Arithmetic Unit (AU) 4-bit | rithmetic_unit.sv | ALL TESTS PASS |
 | EX_12 | Logic Gates from NAND | gates_from_nand.sv | ALL TESTS PASS |
+| EX_13 | Function from Full Adder | unc_from_fa.sv | ALL TESTS PASS |
 
 ## Cách chạy testbench
 
