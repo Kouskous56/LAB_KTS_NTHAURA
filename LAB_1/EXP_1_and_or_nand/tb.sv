@@ -9,8 +9,8 @@ module tb;
         $dumpfile("wave.vcd"); $dumpvars(0, tb);
         for (int i=0;i<8;i++) begin
             {x,y,z} = i[2:0];
+            exp = (~x & y) | (y & z);
             #1;
-            exp = (~x & y) | (~y & z);
             if (f_andor !== exp) begin bad++; $display("FAIL andor %0d", i); end
             if (f_nand  !== exp) begin bad++; $display("FAIL nand %0d", i); end
             if (f_andor !== f_nand) begin bad++; $display("FAIL mismatch %0d", i); end

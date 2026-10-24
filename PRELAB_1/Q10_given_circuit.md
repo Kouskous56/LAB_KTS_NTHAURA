@@ -1,37 +1,33 @@
-# Cau 10: Phan tich mach cho san, toi gian F2
+# Câu 10: Phân tích mạch cho sẵn, tối giản F2
 
-**Mach (Figure):**
-- A -> NOT -> input tren cua OR
-- B -> input duoi cua OR; B cung re nhanh xuong NAND duoi
-- C -> NOT -> tao Cbar; Cbar di den input duoi cua NAND tren (nhanh re len) va den input tren cua NAND duoi
-- Output OR -> input tren cua NAND tren
-- Output NAND tren va NAND duoi -> XNOR -> F
+**Mạch (Figure 1.6):**
+- A → NOT → input trên của OR
+- B → input dưới của OR; B cũng rẽ nhánh xuống NAND dưới
+- C → NOT → tạo C̄; C̄ đi đến input dưới của NAND trên (nhánh rẽ lên) và đến input trên của NAND dưới
+- Output OR → input trên của NAND trên
+- Output NAND trên và NAND dưới → XNOR → F
 
-**Phan tich:**
-- OR output: X = Abar + B
-- NAND tren: Y = NOT( X . Cbar ) = NOT( (Abar+B) . Cbar )
-- NAND duoi: Z = NOT( B . Cbar )
-- F = Y XNOR Z = NOT(Y XOR Z)
+**Phân tích (theo sổ tay kỹ thuật):**
+Đặt A=x, B=y, C=z:
+- s = x̄ + y
+- v1 = NOT(s · z̄) = x·ȳ + z
+- v2 = NOT(y · z̄) = ȳ + z
+- F1 = XNOR(v1, v2) = v1·v2 + v̅1·v̅2 = x + y + z
+- F2 = x + y + z (tối giản)
 
-**Tinh Y, Z:**
-Y = NOT( (Abar+B) . Cbar ) = C + NOT(Abar+B) = C + A . Bbar
-Z = NOT( B . Cbar ) = Bbar + C
+## Bảng chân lý (F1 = F2 = x + y + z)
+| x | y | z | F1 | F2 |
+|---|---|---|---|---|
+| 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 1 | 1 |
+| 0 | 1 | 0 | 1 | 1 |
+| 0 | 1 | 1 | 1 | 1 |
+| 1 | 0 | 0 | 1 | 1 |
+| 1 | 0 | 1 | 1 | 1 |
+| 1 | 1 | 0 | 1 | 1 |
+| 1 | 1 | 1 | 1 | 1 |
 
-**Tinh F = Y XNOR Z:**
-Dat P = C + A.Bbar, Q = Bbar + C.
-- B=0: P = C, Q = 1 -> F = C
-- B=1: P = C + A, Q = C -> F = (C+A) XNOR C
-  - C=0: F = A XNOR 0 = Abar
-  - C=1: F = 1 XNOR 1 = 1
-
-Tong hop: F = Bbar.C + B.(Abar.Cbar + C) = Bbar.C + Abar.B.Cbar + B.C
-          = C(Bbar+B) + Abar.B.Cbar = C + Abar.B.Cbar
-
-Rut gon (dung C + Abar.B.Cbar = C + Abar.B):
-**F = Abar.B + C**
-
-**SOP form:** F = Abar.B + C (hoac viet day du: F = Abar.B.C + Abar.B.Cbar + A.B.C + A.Bbar.C + Abar.Bbar.C).
-
-**F2 (toi gian):** F2 = xbar.y + z (voi x=A, y=B, z=C).
-
-**Nhan xet:** F1 va F2 phai cho cung ket qua logic vi F2 la dang toi gian cua F1.
+## Nhận xét
+- F1 và F2 cho cùng kết quả logic vì F2 là dạng tối giản của F1.
+- Cổng cuối hình là XNOR (không phải XOR đơn).
+- Mạch gốc dùng nhiều IC (74LS04, 74LS08, 74LS32, 74LS00, 74LS86); mạch tối giản chỉ cần 1 cổng OR 3 đầu vào (hoặc 2 cổng OR 2 đầu vào).

@@ -4,8 +4,8 @@ module tb;
     func_f1 u1 (.x(x),.y(y),.z(z),.f(f1));
     func_f2 u2 (.x(x),.y(y),.z(z),.f(f2));
     int bad=0;
-    // Table 1.3 expected: 0,1,1,1,0,1,0,1
-    logic exp_tab [0:7] = '{0,1,1,1,0,1,0,1};
+    // Table 1.3 expected: 0,1,1,1,1,1,1,1 (F = x+y+z)
+    logic exp_tab [0:7] = '{0,1,1,1,1,1,1,1};
     initial begin
         $dumpfile("wave.vcd"); $dumpvars(0, tb);
         for (int i=0;i<8;i++) begin

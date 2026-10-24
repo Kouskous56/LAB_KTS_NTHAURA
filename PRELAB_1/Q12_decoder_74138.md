@@ -11,3 +11,7 @@ f = m2 + m3 + m5 + m7
   hoac ket hop nhieu cong NAND 2 dau vao).
 
 **IC can dung:** 1 x 74LS138 + 1 x 74LS00 (NAND) hoac 74LS20 (NAND 4 dau vao).
+
+## Luu y
+- Prelab Q12 dung f = Sigma(0,3,4,7). Lab manual Experiment 5 ghi f = Sigma(2,3,5,7).
+- Hai bieu thuc khong tuong duong. Xac nhan voi giang vien truoc khi lap mach.

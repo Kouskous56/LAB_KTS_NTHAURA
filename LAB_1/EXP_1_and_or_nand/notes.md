@@ -1,26 +1,29 @@
-# EXP 1 ? Boolean function f(x,y,z) = xbar.y + ybar.z
+# EXP 1 — Boolean function f(x,y,z) = x̄y + yz
 
-## Muc tieu
-Cai dat ham Boolean dang AND-OR va dang chi dung NAND.
+## Mục tiêu
+Cài đặt hàm Boolean dạng AND-OR và dạng chỉ dùng NAND.
 
-## IC can dung (AND-OR)
-- 1 x 74LS04 (NOT), 1 x 74LS08 (AND), 1 x 74LS32 (OR).
+## IC cần dùng (AND-OR)
+- 1 x 74LS04 (NOT): dùng 1 cổng NOT để tạo x̄.
+- 1 x 74LS08 (AND): dùng 2 cổng AND để tạo x̄y và yz.
+- 1 x 74LS32 (OR): dùng 1 cổng OR để cộng hai tích.
 
-## Dang NAND
-- 5 cong NAND 2 dau vao -> 2 x 74LS00.
-- xbar = x NAND x; ybar = y NAND y; a = xbar NAND y; b = ybar NAND z; f = a NAND b.
+## Dạng NAND
+- 4 cổng NAND 2 đầu vào -> 1 x 74LS00.
+- x̄ = x NAND x; a = x̄ NAND y; b = y NAND z; f = a NAND b.
 
-## Bang chan ly
+## Bảng chân lý
 x y z | f
 0 0 0 | 0
-0 0 1 | 1
+0 0 1 | 0
 0 1 0 | 1
 0 1 1 | 1
 1 0 0 | 0
-1 0 1 | 1
+1 0 1 | 0
 1 1 0 | 0
-1 1 1 | 0
-f = Sigma(1,2,3,5) (z la LSB).
+1 1 1 | 1
+
+f = Σm(2,3,7) (z là LSB).
 
 ## Pinout (Nexys A7)
 - SW[2]=x, SW[1]=y, SW[0]=z; LED[0]=f.

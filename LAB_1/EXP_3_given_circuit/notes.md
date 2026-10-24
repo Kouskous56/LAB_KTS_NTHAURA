@@ -1,22 +1,28 @@
-# EXP 3 ? Mach cho san (Figure 1.6), toi gian F2
+# EXP 3 — Mạch cho sẵn (Figure 1.6), tối giản F2
 
-## Muc tieu
-Cai dat mach logic cho san, sau do toi gian va so sanh ket qua.
+## Mục tiêu
+Cài đặt mạch logic cho sẵn, sau đó tối giản và so sánh kết quả.
 
-## Phan tich
-F1 = xbar.y + z (dang toi gian).
-F2 = xbar.y + z (toi gian, cung ket qua).
+## Phân tích (theo sổ tay kỹ thuật)
+F1 = XNOR(v1, v2) với:
+- s = x̄ + y
+- v1 = NOT(s · z̄) = x·ȳ + z
+- v2 = NOT(y · z̄) = ȳ + z
+F1 = x + y + z
+F2 = x + y + z (tối giản, cùng kết quả)
 
-## Bang chan ly (Table 1.3)
+## Bảng chân lý (Table 1.3)
 x y z | F1 | F2
 0 0 0 | 0 | 0
 0 0 1 | 1 | 1
 0 1 0 | 1 | 1
 0 1 1 | 1 | 1
-1 0 0 | 0 | 0
+1 0 0 | 1 | 1
 1 0 1 | 1 | 1
-1 1 0 | 0 | 0
+1 1 0 | 1 | 1
 1 1 1 | 1 | 1
 
-## Nhan xet
-F1 va F2 cho cung ket qua logic vi F2 la dang toi gian cua F1.
+## Nhận xét
+- F1 và F2 cho cùng kết quả logic vì F2 là dạng tối giản của F1.
+- Cổng cuối hình là XNOR (không phải XOR đơn).
+- Mạch tối giản chỉ cần 1 cổng OR 3 đầu vào (hoặc 2 cổng OR 2 đầu vào).

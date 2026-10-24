@@ -1,15 +1,14 @@
-# Cau 7: f = xbar.y + ybar.z dung NAND 2 dau vao
+# Cau 7: f = xbar.y + y.z dung NAND 2 dau vao
 
 **Bien doi:**
-f = xbar.y + ybar.z = NOT( NOT(xbar.y) AND NOT(ybar.z) )
+f = xbar.y + y.z = NOT( NOT(xbar.y) AND NOT(y.z) )
 
-**Mach NAND:**
-- Tao xbar = x NAND x (1 cong NAND lam inverter)
-- Tao ybar = y NAND y (1 cong NAND lam inverter)
-- A = xbar NAND y = NOT(xbar.y)
-- B = ybar NAND z = NOT(ybar.z)
-- f = A NAND B
+**Mach NAND (4 cong NAND2):**
+- n1 = x NAND x = xbar (NAND lam inverter)
+- n2 = NAND(n1, y) = NOT(xbar.y)
+- n3 = NAND(y, z) = NOT(y.z)
+- f = NAND(n2, n3) = xbar.y + y.z
 
-**Can 5 cong NAND 2 dau vao -> 2 x 74LS00** (moi IC co 4 cong).
+**Can 4 cong NAND 2 dau vao -> 1 x 74LS00** (moi IC co 4 cong).
 
 **Ghi chu:** Khong quen noi chan 14 (VCC) va chan 7 (GND).

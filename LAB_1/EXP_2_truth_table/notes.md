@@ -1,9 +1,9 @@
-# EXP 2 ? Boolean function tu bang chan ly (Table 1.2)
+# EXP 2 — Boolean function từ bảng chân lý (Table 1.2)
 
-## Muc tieu
-Cai dat ham Boolean cho truoc bang bang chan ly.
+## Mục tiêu
+Cài đặt hàm Boolean cho trước bằng bảng chân lý.
 
-## Bang chan ly (Table 1.2)
+## Bảng chân lý (Table 1.2)
 x y z | f
 0 0 0 | 0
 0 0 1 | 1
@@ -14,8 +14,8 @@ x y z | f
 1 1 0 | 1
 1 1 1 | 0
 
-## Ham Boolean (SOP)
-F = xbar.ybar.z + xbar.y.zbar + x.y.zbar = Sigma(1,2,6).
+## Hàm Boolean (SOP)
+F = x̄ȳz + x̄yz̄ + xyz̄ = Σm(1,2,6).
 
-## IC can dung (AND-OR)
+## IC cần dùng (AND-OR)
 - 1 x 74LS04, 1 x 74LS08, 1 x 74LS32.

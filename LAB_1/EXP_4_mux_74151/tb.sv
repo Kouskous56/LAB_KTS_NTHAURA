@@ -3,7 +3,8 @@ module tb;
     logic x,y,z,f;
     func_exp4 u (.x(x),.y(y),.z(z),.f(f));
     int bad=0;
-    logic exp_tab [0:7] = '{0,0,1,1,0,1,0,1};
+    // Table 1.4: f = Sigma(1,2,4,7) -> 0,1,1,0,1,0,0,1
+    logic exp_tab [0:7] = '{0,1,1,0,1,0,0,1};
     initial begin
         $dumpfile("wave.vcd"); $dumpvars(0, tb);
         for (int i=0;i<8;i++) begin
