@@ -9,7 +9,9 @@ Nội dung: viết code SystemVerilog mô tả mạch logic (Hình 2.3), IC mult
 
 | File | Nội dung |
 |---|---|
-| [PREP3_Figure2_3.md](PREP3_Figure2_3.md) | Prep 3: mạch Hình 2.3, F = x + y + z |
+| [PREP1_SOP.md](PREP1_SOP.md) | Prep 1: hàm SOP, f = z + xy |
+| [PREP2_Kmap.md](PREP2_Kmap.md) | Prep 2: hàm theo Table 2.1, K-map |
+| [PREP3_Figure2_3.md](PREP3_Figure2_3.md) | Prep 3: mạch Hình 2.3, F = x·ȳ |
 | [PREP4_mux_74LS151.md](PREP4_mux_74LS151.md) | Prep 4: 74LS151, f = Σ(1,2,4,7) |
 | [PREP5_decoder_74LS138.md](PREP5_decoder_74LS138.md) | Prep 5: 74LS138, f = Σ(0,2,5,7) |
 

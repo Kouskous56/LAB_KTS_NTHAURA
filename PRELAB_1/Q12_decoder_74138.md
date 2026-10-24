@@ -1,17 +1,29 @@
-# Cau 12: f(x,y,z) = Sigma(2,3,5,7) dung 74LS138
+# Câu 12: f(x,y,z) = Σ(0,3,4,7) dùng 74LS138
 
-**Phan tich:**
-f = m2 + m3 + m5 + m7
+**Phân tích:**
+f = Σm(0,3,4,7)
 
-**Dung 74LS138 (3-to-8 decoder, output active LOW):**
-- Noi A0 = x, A1 = y, A2 = z.
+**Dùng 74LS138 (3-to-8 decoder, output active LOW):**
+- Nối A0 = x, A1 = y, A2 = z.
 - Enable: E0 = 1, E1bar = 0, E2bar = 0.
-- Output Q2bar, Q3bar, Q5bar, Q7bar se o muc 0 khi minterm tuong ung duoc chon.
-- F = NOT( Q2bar AND Q3bar AND Q5bar AND Q7bar ) (dung cong NAND 4 dau vao,
-  hoac ket hop nhieu cong NAND 2 dau vao).
+- Output Q0bar, Q3bar, Q4bar, Q7bar sẽ ở mức 0 tại các minterm tương ứng.
+- f = NOT(Q0bar AND Q3bar AND Q4bar AND Q7bar) (dùng cổng NAND 4 đầu vào, hoặc kết hợp NAND 2 đầu vào).
 
-**IC can dung:** 1 x 74LS138 + 1 x 74LS00 (NAND) hoac 74LS20 (NAND 4 dau vao).
+## Bảng chân lý
+| x | y | z | f |
+|---|---|---|---|
+| 0 | 0 | 0 | 1 |
+| 0 | 0 | 1 | 0 |
+| 0 | 1 | 0 | 0 |
+| 0 | 1 | 1 | 1 |
+| 1 | 0 | 0 | 1 |
+| 1 | 0 | 1 | 0 |
+| 1 | 1 | 0 | 0 |
+| 1 | 1 | 1 | 1 |
 
-## Luu y
-- Prelab Q12 dung f = Sigma(0,3,4,7). Lab manual Experiment 5 ghi f = Sigma(2,3,5,7).
-- Hai bieu thuc khong tuong duong. Xac nhan voi giang vien truoc khi lap mach.
+**IC cần dùng:** 1 x 74LS138 + 1 x 74LS00 (NAND) hoặc 74LS20 (NAND 4 đầu vào).
+
+## Lưu ý
+- Prelab Q12 dùng f = Σ(0,3,4,7). Lab manual Experiment 5 ghi f = Σ(2,3,5,7).
+- Hai biểu thức không tương đương. Xác nhận với giảng viên trước khi lắp mạch.
+- Sổ tay kỹ thuật cũng ghi sự khác biệt này ở mục 7, Experiment 5.

@@ -1,14 +1,14 @@
-# Cau 7: f = xbar.y + y.z dung NAND 2 dau vao
+# Câu 7: f = x̄y + yz dùng NAND 2 đầu vào
 
-**Bien doi:**
-f = xbar.y + y.z = NOT( NOT(xbar.y) AND NOT(y.z) )
+**Biến đổi:**
+f = x̄y + yz = NOT( NOT(x̄y) AND NOT(yz) )
 
-**Mach NAND (4 cong NAND2):**
-- n1 = x NAND x = xbar (NAND lam inverter)
-- n2 = NAND(n1, y) = NOT(xbar.y)
-- n3 = NAND(y, z) = NOT(y.z)
-- f = NAND(n2, n3) = xbar.y + y.z
+**Mạch NAND (4 cổng NAND2):**
+- n1 = x NAND x = x̄ (NAND làm inverter)
+- n2 = NAND(n1, y) = NOT(x̄y)
+- n3 = NAND(y, z) = NOT(yz)
+- f = NAND(n2, n3) = x̄y + yz
 
-**Can 4 cong NAND 2 dau vao -> 1 x 74LS00** (moi IC co 4 cong).
+**Cần 4 cổng NAND 2 đầu vào -> 1 x 74LS00** (mỗi IC có 4 cổng).
 
-**Ghi chu:** Khong quen noi chan 14 (VCC) va chan 7 (GND).
+**Ghi chú:** Không quên nối chân 14 (VCC) và chân 7 (GND).

@@ -1,4 +1,4 @@
-# PREP 3 — Mạch Hình 2.3 (F = x + y + z)
+# PREP 3 — Mạch Hình 2.3 (F = x · ư)
 
 ## Mô tả mạch (Figure 2.3)
 
@@ -16,32 +16,50 @@ Kết nối:
 - Output NAND (dưới) → input dưới NOR (phải).
 - Output NOR → F.
 
-## Phân tích logic (theo sổ tay kỹ thuật)
+## Phân tích logic (theo sổ tay kỹ thuật Lab 2)
 
-Đặt A=x, B=y, C=z:
-- s = x̄ + y
-- v1 = NOT(s · z̄) = x·ư + z
-- v2 = NOT(y · z̄) = ư + z
-- F1 = XNOR(v1, v2) = v1·v2 + v̄1·v̄2 = x + y + z
-- F2 = x + y + z (tối giản)
+Đặt A=x, B=y, C=z. Các node từ sơ đồ:
 
-→ **F = x + y + z**.
+- A = y·z
+- B = (x + A)̄ = (x + yz)̄
+- C = ȳ
+- D = (x·C)̄ = (xȳ)̄
+- F = (B + D)̄ = x·ȳ
+
+Kết quả cuối độc lập với z, dù z có mặt ở node A/B.
+
+→ **F = x · ȳ** (minterm m4, m5). Vector 000→111: `00001100`.
+
+Lưu ý: sổ tay kỹ thuật (Lab 2) phân tích cho kết quả F = x·ȳ.
+Đối chiếu với hình vẽ gốc và giảng viên.
+
+## Code SystemVerilog (theo yêu cầu Prep 3)
+
+```systemverilog
+module prep3 (
+    input  logic x, y, z,
+    output logic f
+);
+    // F = x & ~y
+    assign f = x & ~y;
+endmodule
+```
 
 ## Bảng chân lý
 
 | x | y | z | F |
 |---|---|---|---|
 | 0 | 0 | 0 | 0 |
-| 0 | 0 | 1 | 1 |
-| 0 | 1 | 0 | 1 |
-| 0 | 1 | 1 | 1 |
+| 0 | 0 | 1 | 0 |
+| 0 | 1 | 0 | 0 |
+| 0 | 1 | 1 | 0 |
 | 1 | 0 | 0 | 1 |
 | 1 | 0 | 1 | 1 |
-| 1 | 1 | 0 | 1 |
-| 1 | 1 | 1 | 1 |
+| 1 | 1 | 0 | 0 |
+| 1 | 1 | 1 | 0 |
 
-F = x + y + z (chỉ 000 cho 0).
+F = x·ȳ (minterm m4, m5). Vector: 00001100.
 
 ## Bình luận / Nhận xét
-- Mạch Hình 2.3 mặc dù có nhiều cổng (OR, AND, NOT, NAND×2, NOR) nhưng rút gọn chỉ là F = x + y + z.
+- Mạch Hình 2.3 mặc dù có nhiều cổng (OR, AND, NOT, NAND×2, NOR) nhưng rút gọn chỉ là F = x·ȳ.
 - Đây là ví dụ tốt về tối giản mạch logic.

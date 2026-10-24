@@ -1,19 +1,34 @@
-# Cau 8: f(x,y,z) = m1 + m3 + m6 (z la LSB) - SOP form
+# Câu 8: f(x,y,z) = Σm(1,3,6) (SOP form)
 
-**Minterm (z la LSB):**
-- m1: x=0,y=0,z=1 -> xbar.ybar.z
-- m3: x=0,y=1,z=1 -> xbar.y.z
-- m6: x=1,y=1,z=0 -> x.y.zbar
+**Minterm (z là LSB):**
+- m1: x=0,y=0,z=1 → x̄ȳz
+- m3: x=0,y=1,z=1 → x̄yz
+- m6: x=1,y=1,z=0 → xyž
 
 **SOP form:**
-F = xbar.ybar.z + xbar.y.z + x.y.zbar
+F = x̄ȳz + x̄yz + xyž
 
-**Rut gon:**
-F = xbar.z (ybar + y) + x.y.zbar = xbar.z + x.y.zbar
+**Rút gọn:**
+F = x̄z(ȳ + y) + xyž = x̄z + xyž
 
-**IC can dung:**
-- 74LS04 (NOT): tao xbar, zbar (neu can).
-- 74LS08 (AND): tao xbar.z va x.y.zbar (can 2 cong AND, nhung x.y.zbar can 3 dau vao -> dung 2 cong AND).
-- 74LS32 (OR): cong hai tich.
+**IC cần dùng:**
+- 74LS04 (NOT): tạo x̄, ž (nếu cần).
+- 74LS08 (AND): tạo x̄z và xyž (cần 2 cổng AND 2 đầu vào, nhưng xyž cần 3 đầu vào → dùng 2 cổng AND).
+- 74LS32 (OR): cộng hai tích.
 
-**Tong: 1 x 74LS04, 1 x 74LS08, 1 x 74LS32.**
+**Tổng: 1 x 74LS04, 1 x 74LS08, 1 x 74LS32.**
+
+Bảng chân lý:
+
+| x | y | z | f |
+|---|---|---|---|
+| 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 1 |
+| 0 | 1 | 0 | 0 |
+| 0 | 1 | 1 | 1 |
+| 1 | 0 | 0 | 0 |
+| 1 | 0 | 1 | 0 |
+| 1 | 1 | 0 | 1 |
+| 1 | 1 | 1 | 0 |
+
+f = Σm(1,3,6) (z là LSB).

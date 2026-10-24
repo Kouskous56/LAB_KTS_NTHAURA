@@ -1,12 +1,12 @@
-# Cau 1: Nguyen tac danh so chan trong IC DIP
+# Câu 1: Nguyên tắc đánh số chân trong IC DIP
 
-IC DIP duoc danh so chan **nguoc chieu kim dong ho** khi nhin tu tren xuong:
+IC DIP được đánh số chân **ngược chiều kim đồng hồ** khi nhìn từ trên xuống:
 
-- Co mot **vet khia (notch)** hoac **cham tron (dot)** o mot dau IC de danh dau chan so 1.
-- Chan 1 nam o goc tren ben trai (khi nhin tu tren, dau notch o phia tren).
-- Danh so tu 1 den het theo chieu **nguoc chieu kim dong ho**: tu chan 1 di xuong doc ben trai,
-  den chan cuoi o goc duoi ben trai, roi sang goc duoi ben phai va di len doc ben phai.
-- Vi du IC 14 chan: chan 1-7 ben trai (tren xuong), chan 8-14 ben phai (duoi len).
+- Có một **vết khía (notch)** hoặc **chấm tròn (dot)** ở một đầu IC để đánh dấu chân số 1.
+- Chân 1 nằm ở góc trên bên trái (khi nhìn từ trên, đầu notch ở phía trên).
+- Đánh số từ 1 đến hết theo chiều **ngược chiều kim đồng hồ**: từ chân 1 đi xuống dọc bên trái,
+  đến chân cuối ở góc dưới bên trái, rồi sang góc dưới bên phải và đi lên dọc bên phải.
+- Ví dụ IC 14 chân: chân 1-7 bên trái (từ trên xuống), chân 8-14 bên phải (từ dưới lên).
 
 ```
        notch
