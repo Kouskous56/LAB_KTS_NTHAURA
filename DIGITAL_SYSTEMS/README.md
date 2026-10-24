@@ -25,6 +25,7 @@ kèm code SystemVerilog, testbench và ghi chú.
 | EX_15 | VHDL Circuit (mux2to1) | cau_2.sv | ALL TESTS PASS |
 | EX_16 | Function F(A,B,C,D) | 
 | EX_17 | Static-1 Hazard | hazard.sv | ALL TESTS PASS |
+| EX_18 | SR-FF 3-bit Counter | counter_sr.sv | ALL TESTS PASS |
 unc_f.sv | ALL TESTS PASS |
 unc_from_fa.sv | ALL TESTS PASS |
 
