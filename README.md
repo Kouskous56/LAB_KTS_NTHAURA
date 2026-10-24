@@ -13,6 +13,8 @@ Bài lab môn Kỹ thuật số (KTS) — thiết kế mạch tổ hợp và m�
 | [`LAB_3/`](LAB_3/README.md) | Mạch tổ hợp và mạch tuần tự | 5 |
 | [`PRELAB_4/`](PRELAB_4/README.md) | Bài 4 phần chuẩn bị (FPGA) | 5 |
 | [`LAB_4/`](LAB_4/README.md) | Mạch tổ hợp và tuần tự trên FPGA | 6 |
+| [PRELAB_5/](PRELAB_5/README.md) | Bài 5 phần chuẩn bị (traffic light, FPGA) | 5 |
+| [LAB_5/](LAB_5/README.md) | Đèn giao thông và giao tiếp FPGA-breadboard | 2 |
 | [`IC_SV/`](IC_SV/README.md) | Thư viện submodule SystemVerilog cho 52 IC logic phổ biến | 52 |
 | [`REPORT_EVIDENCE.md`](REPORT_EVIDENCE.md) | Bảng tổng hợp minh chứng của 14 bài | — |
 | [`LAB_3/IC_REFERENCE.md`](LAB_3/IC_REFERENCE.md) | Chức năng và pinout IC (74LS74, 74LS283, 74LS86, 74LS08, 74LS32, 74LS151, 74LS138) | — |
@@ -21,7 +23,7 @@ Bài lab môn Kỹ thuật số (KTS) — thiết kế mạch tổ hợp và m�
 
 | Công cụ | Kết quả |
 |---|---|
-| iverilog (testbench) | **30/30** project PASS (LAB_1 5, LAB_2 5, PRELAB_3 4, LAB_3 5, PRELAB_4 5, LAB_4 6) |
+| iverilog (testbench) | **32/32** project PASS (LAB_1 5, LAB_2 5, PRELAB_3 4, LAB_3 5, PRELAB_4 5, LAB_4 6, LAB_5 2) |
 | Logisim Evolution 5.0.0 | **14/14** project khớp (chỉ các bài chương 2-3 có sơ đồ Logisim) |
 | SPICE (LTspice 26.1.1 + ngspice 46) | **14/14** project PASS (chỉ các bài chương 2-3 có netlist SPICE) |
 | Vivado bitstream | 5/5 file `.bit` của `LAB_2`; chương 3-4 chưa build `.bit` (người dùng tự build) |
