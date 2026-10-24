@@ -22,6 +22,8 @@ kèm code SystemVerilog, testbench và ghi chú.
 | EX_12 | Logic Gates from NAND | gates_from_nand.sv | ALL TESTS PASS |
 | EX_13 | Function from Full Adder | 
 | EX_14 | Counter 0 to 42 (74393) | counter_0_42.sv | ALL TESTS PASS |
+| EX_15 | VHDL Circuit (mux2to1) | cau_2.sv | ALL TESTS PASS |
+| EX_16 | Function F(A,B,C,D) | unc_f.sv | ALL TESTS PASS |
 unc_from_fa.sv | ALL TESTS PASS |
 
 ## Cách chạy testbench
