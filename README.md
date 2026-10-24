@@ -17,6 +17,7 @@ Bài lab môn Kỹ thuật số (KTS) — thiết kế mạch tổ hợp và m�
 | [LAB_5/](LAB_5/README.md) | Đèn giao thông và giao tiếp FPGA-breadboard | 2 |
 | [`IC_SV/`](IC_SV/README.md) | Thư viện submodule SystemVerilog cho 52 IC logic phổ biến | 52 |
 | [`REPORT_EVIDENCE.md`](REPORT_EVIDENCE.md) | Bảng tổng hợp minh chứng của 14 bài | — |
+| [SUBSTRATE.md](SUBSTRATE.md) | Sổ tay nền tảng: thiết kế số, SystemVerilog, FPGA, timing, debug | — |
 | [`LAB_3/IC_REFERENCE.md`](LAB_3/IC_REFERENCE.md) | Chức năng và pinout IC (74LS74, 74LS283, 74LS86, 74LS08, 74LS32, 74LS151, 74LS138) | — |
 
 ## Kết quả kiểm chứng
