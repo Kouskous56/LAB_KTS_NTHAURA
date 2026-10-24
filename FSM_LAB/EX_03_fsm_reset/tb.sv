@@ -5,14 +5,17 @@ module tb;
     int bad=0;
     initial begin
         // async reset
-        rst_async=1; #5; if (z !== 0) begin bad++; $display("FAIL reset"); end
+        rst_async=1;
+        for (int i=0;i<2;i++) begin clk=0; #5; clk=1; #5; clk=0; #5; end
+        if (z !== 0) begin bad++; $display("FAIL reset"); end
         rst_async=0; #5;
         // enable=0: no state change
-        x=1; clk=0; #5; clk=1; #5; clk=0; #5;
+        en=0; x=1; clk=0; #5; clk=1; #5; clk=0; #5;
         if (z !== 0) begin bad++; $display("FAIL no-enable"); end
         // enable=1: capture
         en=1; clk=0; #5; clk=1; #5; clk=0; #5;
         if (z !== 1) begin bad++; $display("FAIL enable capture"); end
         if (bad==0) $display("EX_03 ALL TESTS PASS"); else $display("EX_03 FAIL: %0d", bad);
+        $finish;
     end
 endmodule

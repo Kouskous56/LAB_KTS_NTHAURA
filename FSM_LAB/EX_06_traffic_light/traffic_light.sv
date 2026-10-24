@@ -9,7 +9,7 @@ module traffic_light (
     state_t state;
     logic [1:0] timer;
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk or posedge rst) begin
         if (rst) begin state <= GREEN; timer <= 2'd2; end
         else if (tick_1s) begin
             case (state)

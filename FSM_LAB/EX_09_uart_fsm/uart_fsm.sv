@@ -12,7 +12,7 @@ module uart_fsm (
     logic [2:0] bit_cnt;
     logic [7:0] data_reg;
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             state <= IDLE;
             tx <= 1'b1;  // idle high

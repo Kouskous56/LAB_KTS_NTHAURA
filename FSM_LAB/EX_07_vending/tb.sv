@@ -5,7 +5,9 @@ module tb;
     vending u (.clk(clk),.rst(rst),.coin(coin),.select(select),.dispense(dispense),.change(change));
     int bad=0;
     initial begin
-        rst=1; #10; rst=0; #5;
+        rst=1;
+        for (int i=0;i<2;i++) begin clk=0; #5; clk=1; #5; clk=0; #5; end
+        rst=0; #5;
         // Insert coin
         coin=1; clk=0; #5; clk=1; #5; clk=0; #5; coin=0;
         // Select product
@@ -17,5 +19,6 @@ module tb;
         clk=0; #5; clk=1; #5; clk=0; #5;
         if (dispense !== 0) begin bad++; $display("FAIL idle"); end
         if (bad==0) $display("EX_07 ALL TESTS PASS"); else $display("EX_07 FAIL: %0d", bad);
+        $finish;
     end
 endmodule

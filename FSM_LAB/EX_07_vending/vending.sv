@@ -8,7 +8,7 @@ module vending (
     typedef enum logic [1:0] {IDLE, COIN, SELECT, DISPENSE} state_t;
     state_t state;
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk or posedge rst) begin
         if (rst) state <= IDLE;
         else begin
             case (state)

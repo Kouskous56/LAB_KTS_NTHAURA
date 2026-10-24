@@ -15,5 +15,6 @@ module tb;
             if (z !== exp_z[i]) begin bad++; $display("FAIL step %0d: x=%b z=%b (exp %b)", i, x, z, exp_z[i]); end
         end
         if (bad==0) $display("EX_05 ALL TESTS PASS"); else $display("EX_05 FAIL: %0d", bad);
+        $finish;
     end
 endmodule

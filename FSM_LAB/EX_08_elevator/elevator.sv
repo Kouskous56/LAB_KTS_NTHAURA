@@ -9,7 +9,7 @@ module elevator (
     typedef enum logic [1:0] {F0, F1, F2} state_t;
     state_t state;
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk or posedge rst) begin
         if (rst) state <= F0;
         else begin
             case (state)

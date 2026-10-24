@@ -4,7 +4,9 @@ module tb;
     moore_basic u (.clk(clk),.rst(rst),.x(x),.z(z));
     int bad=0;
     initial begin
-        rst=1; #10; rst=0; #5;
+        rst=1;
+        for (int i=0;i<2;i++) begin clk=0; #5; clk=1; #5; clk=0; #5; end
+        rst=0; #5;
         // IDLE: z=0
         x=0; clk=0; #5; clk=1; #5; clk=0; #5;
         if (z !== 0) begin bad++; $display("FAIL idle z"); end
@@ -18,5 +20,6 @@ module tb;
         x=0; clk=0; #5; clk=1; #5; clk=0; #5;
         if (z !== 0) begin bad++; $display("FAIL back to idle"); end
         if (bad==0) $display("EX_01 ALL TESTS PASS"); else $display("EX_01 FAIL: %0d", bad);
+        $finish;
     end
 endmodule

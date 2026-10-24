@@ -8,7 +8,7 @@ module param_fsm #(parameter N = 4) (
 );
     logic [$clog2(N)-1:0] state, next_state;
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk or posedge rst) begin
         if (rst) state <= '0;
         else     state <= next_state;
     end

@@ -8,7 +8,7 @@ module moore_basic (
     typedef enum logic {IDLE, ACTIVE} state_t;
     state_t state, next_state;
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk or posedge rst) begin
         if (rst) state <= IDLE;
         else     state <= next_state;
     end

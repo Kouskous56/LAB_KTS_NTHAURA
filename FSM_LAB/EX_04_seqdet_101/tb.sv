@@ -14,5 +14,6 @@ module tb;
             clk=0; #5; clk=1; #5; clk=0; #5;
         end
         if (bad==0) $display("EX_04 ALL TESTS PASS"); else $display("EX_04 FAIL: %0d", bad);
+        $finish;
     end
 endmodule

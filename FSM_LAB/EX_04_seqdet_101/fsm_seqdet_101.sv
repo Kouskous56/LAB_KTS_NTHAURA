@@ -7,7 +7,7 @@ module fsm_seqdet_101 (
     typedef enum logic [1:0] {S0, S1, S2} state_t;
     state_t state, next_state;
 
-    always_ff @(posedge clk) begin
+    always_ff @(posedge clk or posedge rst) begin
         if (rst) state <= S0;
         else     state <= next_state;
     end
