@@ -18,6 +18,7 @@ kèm code SystemVerilog, testbench và ghi chú.
 | EX_08 | 4-way Traffic Light | `traffic_4way.sv` | ALL TESTS PASS |
 | EX_09 | Advanced Elevator | `elevator_adv.sv` | ALL TESTS PASS |
 | EX_10 | Digital Lock (password) | `digital_lock.sv` | ALL TESTS PASS |
+| EX_11 | Arithmetic Unit (AU) 4-bit | rithmetic_unit.sv | ALL TESTS PASS |
 
 ## Cách chạy testbench
 
