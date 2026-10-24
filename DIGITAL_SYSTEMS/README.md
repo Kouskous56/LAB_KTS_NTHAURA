@@ -27,6 +27,8 @@ kèm code SystemVerilog, testbench và ghi chú.
 | EX_17 | Static-1 Hazard | hazard.sv | ALL TESTS PASS |
 | EX_18 | SR-FF 3-bit Counter | counter_sr.sv | ALL TESTS PASS |
 | EX_19 | 3-bit Sync Counter (X control) | counter_x.sv | ALL TESTS PASS |
+| EX_20 | Mealy Seq (110/1111) | mealy_seq.sv | ALL TESTS PASS |
+| EX_21 | PLA + T-FF Seq | seq_pla.sv | ALL TESTS PASS |
 unc_f.sv | ALL TESTS PASS |
 unc_from_fa.sv | ALL TESTS PASS |
 
