@@ -5,6 +5,8 @@ Bài lab môn Kỹ thuật số (KTS) — thiết kế mạch tổ hợp và m�
 
 | Thư mục | Nội dung | Số bài |
 |---|---|---|
+  | [`PRELAB_1/`](PRELAB_1/README.md) | B?i 1 ph?n chu?n b? (breadboard, IC pinout) | 12 |
+  | [`LAB_1/`](LAB_1/README.md) | M?ch t? h?p tr?n breadboard (Boolean function) | 5 |
 | [`LAB_2/`](LAB_2/README.md) | Boolean algebra và mạch tổ hợp | 5 |
 | [`PRELAB_3/`](PRELAB_3/README.md) | Bài 3 phần chuẩn bị | 4 |
 | [`LAB_3/`](LAB_3/README.md) | Mạch tổ hợp và mạch tuần tự | 5 |
@@ -18,7 +20,7 @@ Bài lab môn Kỹ thuật số (KTS) — thiết kế mạch tổ hợp và m�
 
 | Công cụ | Kết quả |
 |---|---|
-| iverilog (testbench) | **25/25** project PASS (LAB_2 5, PRELAB_3 4, LAB_3 5, PRELAB_4 5, LAB_4 6) |
+| iverilog (testbench) | **30/30** project PASS (LAB_1 5, LAB_2 5, PRELAB_3 4, LAB_3 5, PRELAB_4 5, LAB_4 6) |
 | Logisim Evolution 5.0.0 | **14/14** project khớp (chỉ các bài chương 2-3 có sơ đồ Logisim) |
 | SPICE (LTspice 26.1.1 + ngspice 46) | **14/14** project PASS (chỉ các bài chương 2-3 có netlist SPICE) |
 | Vivado bitstream | 5/5 file `.bit` của `LAB_2`; chương 3-4 chưa build `.bit` (người dùng tự build) |
