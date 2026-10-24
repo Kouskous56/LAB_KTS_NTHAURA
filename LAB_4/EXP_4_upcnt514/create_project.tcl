@@ -1,6 +1,6 @@
 # create_project.tcl - run: vivado -mode batch -source create_project.tcl
 set proj_dir [file normalize [file dirname [info script]]]
-set proj_name "EXP_4_4"
+set proj_name "EXP_4_upcnt514"
 create_project $proj_name "$proj_dir/project_1" -part xc7a100tcsg324-1 -force
 add_files -norecurse [list "up_counter_5to14.sv" "clock_divider_core.sv" "top_module.sv"]
 set_property top top_module [current_fileset]

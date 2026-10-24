@@ -105,7 +105,7 @@ vvp tb.vvp
 
 ## Tổng số
 
-- **52 IC** (14 cổng + 14 tổ hợp + 18 tuần tự + 2 nhớ + 4 hỗ trợ)
+- **52 IC** (14 cổng + 15 tổ hợp + 17 tuần tự + 2 nhớ + 4 hỗ trợ)
 - Mỗi IC có testbench tự kiểm tra in `ALL TESTS PASS`.
 - Tất cả biên dịch được với `iverilog -g2012`.
 

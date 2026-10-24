@@ -1,6 +1,6 @@
 # create_project.tcl - run: vivado -mode batch -source create_project.tcl
 set proj_dir [file normalize [file dirname [info script]]]
-set proj_name "EXP_4_6"
+set proj_name "EXP_6_vending"
 create_project $proj_name "$proj_dir/project_1" -part xc7a100tcsg324-1 -force
 add_files -norecurse [list "vending_fsm.sv" "top_module.sv"]
 set_property top top_module [current_fileset]

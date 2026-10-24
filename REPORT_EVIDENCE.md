@@ -54,6 +54,7 @@ bo Nexys A7.
 - Logisim: **14/14** project khớp bảng chân lý manual (chỉ các bài chương 2-3 có sơ đồ Logisim)
 - SPICE: **14/14** project PASS ở cả LTspice và ngspice (chỉ các bài chương 2-3 có netlist SPICE)
 - Bitstream: **5/25** project có file `.bit` (chỉ LAB_2; chương 3-4 người dùng tự build)
+- IC_SV: **52/52** IC submodule (gates 14, combinational 15, sequential 17, memory 2, misc 4) PASS
 
 ## Kết quả chi tiết theo bài
 
